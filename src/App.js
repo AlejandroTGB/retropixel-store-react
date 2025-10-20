@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ProductosProvider } from './context/ProductosContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/home/Home';
 
 function App() {
   return (
+  <ProductosProvider>
     <Router>
       <Navbar />
       <Routes>
@@ -19,6 +21,7 @@ function App() {
       </Routes>
       <Footer />
     </Router>
+  </ProductosProvider>
   );
 }
 
