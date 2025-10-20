@@ -1,0 +1,67 @@
+.header {
+    background-color: #1a1d2a;
+    height: 100px;
+    padding: 20px 0;
+    border-bottom: 1px solid #3a3f5c;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.navList {
+    display: flex;
+    list-style: none;
+}
+
+.navList li {
+    margin-right: 30px;
+}
+
+.navList a {
+    text-decoration: none;
+    color: #a0a6c1;
+    font-size: 16px;
+}
+
+.navList a:hover {
+    color: #3b8cc9;
+}
+
+.navList a.active {
+    color: #3b8cc9;
+    font-weight: bold;
+}
+
+.carritoFlotante {
+    position: absolute;
+    right: 100px;
+    top: 40px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.2s ease;
+    z-index: 10;
+}
+
+.carritoFlotante:hover {
+    transform: scale(1.3);
+}
