@@ -105,6 +105,7 @@
   border: none;
   padding: 10px 20px;
   font-size: 14px;
+  font-family: 'PixelGrid', sans-serif;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
