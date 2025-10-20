@@ -1,0 +1,175 @@
+.main {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.navigation {
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.btnBack {
+  background-color: #495057;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+}
+
+.btnBack:hover {
+  background-color: #6c757d;
+}
+
+.blogDetail {
+  padding: 0;
+}
+
+.blogHeader h1 {
+  font-size: 32px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.blogMeta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: #a0a6c1;
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+.blogMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.blogImage {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.blogImage img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.blogContent {
+  color: #a0a6c1;
+  line-height: 1.7;
+}
+
+.blogContent p {
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #a0a6c1;
+  text-align: left;
+}
+
+.blogContent p:first-child {
+  padding-left: 20px;
+  border-left: 4px solid #3b8cc9;
+  font-style: italic;
+}
+
+.blogContent h2 {
+  font-size: 18px;
+  color: #3b8cc9;
+  margin: 30px 0 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blogContent ul {
+  list-style: none;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+.blogContent li {
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 25px;
+  color: #a0a6c1;
+  font-size: 15px;
+}
+
+.blogContent li:before {
+  content: "▸";
+  color: #3b8cc9;
+  position: absolute;
+  left: 5px;
+  font-size: 18px;
+}
+
+.ctaSection {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 40px;
+}
+
+.btnPrimary {
+  background-color: #3b8cc9;
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #339af0;
+}
+
+.priceBox {
+  background-color: transparent;
+  border: 2px solid #3b8cc9;
+  border-radius: 8px;
+  padding: 25px;
+  margin: 30px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.priceOriginal {
+  color: #7a7e8f;
+  text-decoration: line-through;
+  font-size: 16px;
+}
+
+.priceOffer {
+  color: #3b8cc9;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.discount {
+  background-color: #00c9a7;
+  color: #0f111a;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}

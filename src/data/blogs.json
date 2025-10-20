@@ -1,0 +1,25 @@
+[
+  {
+    "id": "nes-classic",
+    "titulo": "Lanzamiento de la Consola Nes Classic Collection",
+    "fecha": "15 de Marzo, 2024",
+    "autor": "RetroPixel Team",
+    "categoria": "Noticias",
+    "imagen": "https://duroc-sa.github.io/Pagina-Fullstack-II/img/Blogs/blog1.png",
+    "resumen": "Descubre todo sobre la nueva Consola Nes Classic Collection, que trae de vuelta los mejores juegos de los 80 y 90 con tecnología moderna.",
+    "precioOriginal": 89990,
+    "precioOffer": 69990,
+    "descuento": "22%",
+    "contenido": "🎮 **La nostalgia cobra vida una vez más** con el lanzamiento oficial de la Consola Nes Classic Collection, una edición especial que promete transportar a los jugadores de vuelta a la era dorada de los videojuegos.\n\n## 🚀 ¿Qué incluye esta nueva colección?\n\nLa Consola Nes Classic Collection viene cargada con características:\n\n- **30+ Juegos Clásicos:** Desde Super Mario Bros. hasta The Legend of Zelda\n- **Tecnología HD:** Gráficos mejorados manteniendo el estilo pixel art\n- **Controles Inalámbricos:** La comodidad moderna con la sensación retro\n- **Función Save State:** Guarda tu progreso en cualquier momento\n- **Multijugador Local:** Hasta 2 jugadores simultáneos\n\n## 💰 Precio y Disponibilidad\n\nDisponible a partir del 1 de Abril, 2024 con un precio especial de lanzamiento.\n\n## 🛒 ¿Dónde Comprar?\n\nDisponible exclusivamente en RetroPixel Store."
+  },
+  {
+    "id": "top-10-juegos",
+    "titulo": "Top 10 Juegos Retro que Debes Jugar",
+    "fecha": "10 de Febrero, 2024",
+    "autor": "RetroPixel Team",
+    "categoria": "Guías",
+    "imagen": "https://duroc-sa.github.io/Pagina-Fullstack-II/img/Blogs/blog2.png",
+    "resumen": "Una lista imprescindible de los mejores juegos retro que todo fanático debe experimentar al menos una vez en la vida.",
+    "contenido": "## 🎮 Top 10 Juegos Retro que Debes Jugar\n\nAquí te presentamos una selección de los juegos más legendarios que marcaron la historia del gaming:\n\n### 1. **Super Mario Bros.** (1985)\nEl juego que revolucionó la industria y salvó los videojuegos de la crisis del 83.\n\n### 2. **The Legend of Zelda** (1986)\nAventura épica que definió el género de aventuras en videojuegos.\n\n### 3. **Pac-Man** (1980)\nEl arcade más icónico de todos los tiempos.\n\n### 4. **Tetris** (1984)\nEl puzzle game definitivo que sigue siendo adictivo después de 40 años.\n\n### 5. **Sonic the Hedgehog** (1991)\nVelocidad pura en 16 bits.\n\n### 6. **Mega Man 2** (1988)\nDificultad justa y gameplay perfecto.\n\n### 7. **Castlevania** (1987)\nAcción de horror que definió un género.\n\n### 8. **Contra** (1987)\nShooter de acción clásico.\n\n### 9. **Metroid** (1986)\nExploración y acción en perfecto equilibrio.\n\n### 10. **Final Fantasy** (1987)\nEl JRPG que comenzó una leyenda.\n\n## 💡 ¿Por qué estos juegos?\n\nEstos títulos no solo fueron exitosos, sino que innovaron el medium y dejaron un legado que perdura hasta hoy."
+  }
+]
