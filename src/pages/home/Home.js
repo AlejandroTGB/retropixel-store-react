@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
-import productos from '../../data/productos.json';
+import { useProductos } from "../../context/ProductosContext";
 
 export default function Home() {
-    
+    const { productos } = useProductos();
     const productosDestacados = productos.slice(0, 3);
 
     const handleAgregarCarrito = (producto) => {
