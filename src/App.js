@@ -3,6 +3,7 @@ import { ProductosProvider } from './context/ProductosContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/home/Home';
+import Productos from './pages/productos/Productos';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/productos" element={<div>PRODUCTOS - Por crear</div>} />
+        <Route path="/productos" element={<Productos />} />
         <Route path="/nosotros" element={<div>NOSOTROS - Por crear</div>} />
         <Route path="/blogs" element={<div>BLOGS - Por crear</div>} />
         <Route path="/contacto" element={<div>CONTACTO - Por crear</div>} />
