@@ -1,0 +1,119 @@
+.main {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.heroContacto {
+  background: linear-gradient(rgba(36, 41, 56, 0.3), rgba(36, 41, 56, 0.3)),
+    url('https://duroc-sa.github.io/Pagina-Fullstack-II/img/Gif/blogs.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #1a1d2a;
+  text-align: center;
+  padding: 90px 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border: 1px solid #3a3f5c;
+}
+
+.heroContacto h2 {
+  font-size: 36px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.heroContacto p {
+  font-size: 18px;
+  color: #a0a6c1;
+}
+
+.contactoWrapper {
+  padding: 20px 0;
+}
+
+.formularioContacto {
+  background-color: #1a1d2a;
+  border: 1px solid #3a3f5c;
+  border-radius: 10px;
+  padding: 40px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.formularioContacto h3 {
+  font-size: 24px;
+  color: #3b8cc9;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.mensajeExito {
+  background-color: rgba(60, 180, 120, 0.15);
+  border: 1px solid #3cb478;
+  color: #a0d085;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.campoForm {
+  margin-bottom: 20px;
+}
+
+.campoForm label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.campoForm input,
+.campoForm textarea {
+  width: 100%;
+  padding: 12px;
+  background-color: #0f111a;
+  border: 1px solid #3a3f5c;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.campoForm input:focus,
+.campoForm textarea:focus {
+  outline: none;
+  border-color: #3b8cc9;
+}
+
+.campoForm textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btnPrimary {
+  width: 100%;
+  background-color: #3b8cc9;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #339af0;
+}
