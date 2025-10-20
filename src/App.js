@@ -8,6 +8,7 @@ import Nosotros from './pages/nosotros/Nosotros';
 import Blog from './pages/blog/Blog';
 import DetalleBlog from './pages/detalleBlog/DetalleBlog';
 import Contacto from './pages/contacto/Contacto';
+import Login from './pages/login/Login';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/blogs" element={<Blog />} />
         <Route path="/blogs/:id" element={<DetalleBlog />} />
         <Route path="/contacto" element={<Contacto />} />
-        <Route path="/login" element={<div>LOGIN - Por crear</div>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<div>REGISTRO - Por crear</div>} />
         <Route path="/carrito" element={<div>CARRITO - Por crear</div>} />
       </Routes>
