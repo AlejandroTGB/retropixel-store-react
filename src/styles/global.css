@@ -1,12 +1,32 @@
+@font-face {
+    font-family: 'PixelGrid';
+    src: url('https://duroc-sa.github.io/Pagina-Fullstack-II/css/fonts/pixelgrid-squareboldm.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelGridXL';
+    src: url('https://duroc-sa.github.io/Pagina-Fullstack-II/css/fonts/pixelgrid-squareboldxl.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PixelGridS';
+    src: url('https://duroc-sa.github.io/Pagina-Fullstack-II/css/fonts/pixelgrid-squarebolds.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'PixelGridS', Arial, sans-serif;
   background-color: #121520;
   color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {

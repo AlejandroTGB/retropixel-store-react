@@ -1,14 +1,14 @@
 .header {
     background-color: #1a1d2a;
     height: 100px;
-    padding: 20px 0;
+    padding: 0px 0;
     border-bottom: 1px solid #3a3f5c;
 }
 
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,7 @@
 }
 
 .logo h1 {
-    font-family: 'Arial', sans-serif;
+    font-family: 'PixelGrid', Arial, sans-serif;
     font-size: 22px;
     color: #ffffff;
     font-weight: normal;

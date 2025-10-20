@@ -9,7 +9,7 @@
 }
 
 .heroBlog {
-  background: linear-gradient(rgba(36, 41, 56, 0.6), rgba(36, 41, 56, 0.6)), 
+  background: linear-gradient(rgba(36, 41, 56, 0.3), rgba(36, 41, 56, 0.3)), 
     url('https://duroc-sa.github.io/Pagina-Fullstack-II/img/Gif/blogs.gif');
   background-size: cover;
   background-position: center;

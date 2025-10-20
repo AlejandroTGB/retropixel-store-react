@@ -13,8 +13,8 @@ export default function Productos() {
     <main className={styles.main}>
       <section className={styles.heroProductos}>
         <div className={styles.container}>
-          <h2>Catálogo de Juegos</h2>
-          <p>Explora nuestra colección completa de videojuegos retro clásicos</p>
+          <h2>Catálogo de Juegos Retro</h2>
+          <p>Descubre nuestra colección completa de clásicos atemporales. Desde arcade legendarios hasta RPGs épicos.</p>
         </div>
       </section>
 
