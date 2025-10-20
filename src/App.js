@@ -9,6 +9,7 @@ import Blog from './pages/blog/Blog';
 import DetalleBlog from './pages/detalleBlog/DetalleBlog';
 import Contacto from './pages/contacto/Contacto';
 import Login from './pages/login/Login';
+import Registro from './pages/registro/Registro';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/blogs/:id" element={<DetalleBlog />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<div>REGISTRO - Por crear</div>} />
+        <Route path="/registro" element={<Registro />} />
         <Route path="/carrito" element={<div>CARRITO - Por crear</div>} />
       </Routes>
       <Footer />

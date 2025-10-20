@@ -1,0 +1,375 @@
+.main {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.registerSection {
+  padding: 20px 0;
+  min-height: 70vh;
+}
+
+.registerContainer {
+  display: flex;
+  max-width: 1000px;
+  margin: -40px auto 0 auto;
+  background-color: #1a1d2a;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.registerInfo {
+  flex: 0.8;
+  background: linear-gradient(135deg, #2a2d3a, #1a1d2a);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerForm {
+  flex: 1.2;
+  padding: 40px;
+  max-width: 500px;
+}
+
+.registerForm h2 {
+  font-size: 28px;
+  color: #3b8cc9;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.registerSubtitle {
+  text-align: center;
+  color: #a0a6c1;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.mensajeExito {
+  background-color: rgba(60, 180, 120, 0.15);
+  border: 1px solid #3cb478;
+  color: #a0d085;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.formRegister {
+  margin-bottom: 25px;
+}
+
+.formRow {
+  display: flex;
+  gap: 15px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup.halfWidth {
+  flex: 1;
+}
+
+.formGroup label {
+  display: block;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #121520;
+  border: 2px solid #3a3f5c;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #3b8cc9;
+  box-shadow: 0 0 0 3px rgba(59, 140, 201, 0.1);
+}
+
+.formGroup input::placeholder {
+  color: #6c757d;
+}
+
+.formGroup select option {
+  background-color: #121520;
+  color: #ffffff;
+}
+
+.fieldHint {
+  color: #6c757d;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
+.passwordStrength {
+  margin-top: 8px;
+}
+
+.strengthBar {
+  width: 100%;
+  height: 4px;
+  background-color: #3a3f5c;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.strengthFill {
+  height: 100%;
+  width: 0%;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.formCheckboxes {
+  margin-bottom: 25px;
+}
+
+.formCheckboxes .checkboxContainer {
+  display: block;
+  margin-bottom: 12px;
+  color: #a0a6c1;
+  font-size: 14px;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkboxContainer input {
+  margin-right: 8px;
+  width: auto !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+.checkmark {
+  margin-right: 0;
+}
+
+.termsLink {
+  color: #3b8cc9;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.termsLink:hover {
+  text-decoration: underline;
+  color: #339af0;
+}
+
+.btnRegister {
+  width: 100%;
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btnRegister:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.loginDivider {
+  text-align: center;
+  margin: 25px 0;
+  position: relative;
+}
+
+.loginDivider span {
+  background-color: #1a1d2a;
+  color: #a0a6c1;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+.loginDivider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #3a3f5c;
+}
+
+.socialRegister {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.socialRegister .btnSocial {
+  flex: 1;
+}
+
+.btnSocial {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'PixelGrid', sans-serif;
+  transition: opacity 0.3s;
+  color: white;
+}
+
+.btnSocial:hover {
+  opacity: 0.9;
+}
+
+.google {
+  background-color: #db4437;
+}
+
+.facebook {
+  background-color: #1877f2;
+}
+
+.loginLink {
+  text-align: center;
+  color: #a0a6c1;
+  font-size: 14px;
+}
+
+.loginLink a {
+  color: #3b8cc9;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+  color: #339af0;
+}
+
+.infoContent h3 {
+  color: #3b8cc9;
+  font-size: 26px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.welcomeText {
+  color: #a0a6c1;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.featureItem {
+  text-align: center;
+  padding: 15px;
+  background-color: rgba(59, 140, 201, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(59, 140, 201, 0.2);
+}
+
+.featureIcon {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.featureItem h4 {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.featureItem p {
+  color: #a0a6c1;
+  font-size: 12px;
+  margin: 0;
+}
+
+.retroDecoration {
+  text-align: center;
+}
+
+.pixelLine {
+  color: #3b8cc9;
+  font-size: 14px;
+  margin: 10px 0;
+  opacity: 0.6;
+}
+
+.gameIcons {
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+@media (max-width: 968px) {
+  .registerContainer {
+    flex-direction: column-reverse;
+    margin: 20px;
+  }
+
+  .registerForm,
+  .registerInfo {
+    max-width: 100%;
+    padding: 30px 20px;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .formGroup.halfWidth {
+    flex: none;
+  }
+
+  .socialRegister {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
