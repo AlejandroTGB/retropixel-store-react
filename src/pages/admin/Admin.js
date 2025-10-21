@@ -64,10 +64,10 @@ export default function Admin() {
   };
 
   const handleEliminar = (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-      eliminarProducto(id);
-    }
-  };
+  if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+    eliminarProducto(id);
+  }
+};
 
   return (
     <main className={styles.main}>

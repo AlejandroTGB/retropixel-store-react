@@ -1,12 +1,16 @@
 import styles from './Carrito.module.css';
 import { useCarrito } from '../../context/CarritoContext';
+import { useProductos } from '../../context/ProductosContext';
 import { Link } from 'react-router-dom';
 
 export default function Carrito() {
   const { carrito, eliminarProducto, actualizarCantidad, vaciarCarrito } = useCarrito();
+  const { productos } = useProductos();
 
   const calcularTotal = () => {
-    return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+    return carrito
+      .filter(item => productos.find(p => p.id === item.id))
+      .reduce((total, item) => total + (item.precio * item.cantidad), 0);
   };
 
   const total = calcularTotal();
@@ -42,7 +46,7 @@ export default function Carrito() {
                     </tr>
                   </thead>
                   <tbody>
-                    {carrito.map(item => (
+                    {carrito.filter(item => productos.find(p => p.id === item.id)).map(item => (
                       <tr key={item.id}>
                         <td className={styles.nombreProducto}>{item.nombre}</td>
                         <td>${item.precio.toLocaleString()}</td>
@@ -88,7 +92,7 @@ export default function Carrito() {
 
                   <div className={styles.resumenRow}>
                     <span>Total Productos:</span>
-                    <span>{carrito.reduce((sum, item) => sum + item.cantidad, 0)}</span>
+                    <span>{carrito.filter(item => productos.find(p => p.id === item.id)).reduce((sum, item) => sum + item.cantidad, 0)}</span>
                   </div>
 
                   <div className={styles.totalFinal}>

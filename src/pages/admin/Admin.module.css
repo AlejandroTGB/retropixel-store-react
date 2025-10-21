@@ -1,0 +1,306 @@
+.main {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.adminSection {
+  padding: 20px 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.header h2 {
+  font-size: 36px;
+  color: #ffffff;
+}
+
+.btnNuevoProducto {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+}
+
+.btnNuevoProducto:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.productosAdmin {
+  background-color: #1a1d2a;
+  border: 1px solid #3a3f5c;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.productosAdmin h3 {
+  font-size: 24px;
+  color: #3b8cc9;
+  margin-bottom: 20px;
+}
+
+.sinProductos {
+  text-align: center;
+  padding: 40px;
+  color: #a0a6c1;
+  font-size: 16px;
+}
+
+.tablaAdmin {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.tablaAdmin th {
+  background-color: #141723;
+  color: #3b8cc9;
+  padding: 15px;
+  text-align: left;
+  font-family: 'PixelGrid', sans-serif;
+  border-bottom: 2px solid #3a3f5c;
+}
+
+.tablaAdmin td {
+  padding: 15px;
+  border-bottom: 1px solid #3a3f5c;
+  color: #a0a6c1;
+}
+
+.tablaAdmin tbody tr {
+  transition: all 0.2s ease;
+}
+
+.tablaAdmin tbody tr:hover {
+  background-color: #252933;
+  border-color: #3b8cc9;
+}
+
+.tdDescripcion {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.imgPreview {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  background-color: #0f111a;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btnEditar {
+  background-color: #3b8cc9;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnEditar:hover {
+  background-color: #339af0;
+}
+
+.btnEliminarAdmin {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnEliminarAdmin:hover {
+  background-color: #c82333;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #1a1d2a;
+  border: 1px solid #3a3f5c;
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #3a3f5c;
+  padding-bottom: 15px;
+}
+
+.modalHeader h3 {
+  font-size: 24px;
+  color: #3b8cc9;
+}
+
+.btnCerrar {
+  background: none;
+  border: none;
+  color: #a0a6c1;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.btnCerrar:hover {
+  color: #ffffff;
+}
+
+.formularioAdmin {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.formGroup input,
+.formGroup textarea {
+  padding: 12px;
+  background-color: #0f111a;
+  border: 1px solid #3a3f5c;
+  border-radius: 5px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #3b8cc9;
+  box-shadow: 0 0 0 3px rgba(59, 140, 201, 0.1);
+}
+
+.modalButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btnGuardar {
+  flex: 1;
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+}
+
+.btnGuardar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btnCancelar {
+  flex: 1;
+  background-color: #495057;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnCancelar:hover {
+  background-color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .btnNuevoProducto {
+    width: 100%;
+  }
+
+  .tablaAdmin {
+    font-size: 12px;
+  }
+
+  .tablaAdmin th,
+  .tablaAdmin td {
+    padding: 10px;
+  }
+
+  .acciones {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .modalContent {
+    width: 95%;
+  }
+}

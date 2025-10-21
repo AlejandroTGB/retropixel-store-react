@@ -1,14 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
+import { useProductos } from '../context/ProductosContext';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const location = useLocation();
-  const { getTotalItems } = useCarrito();
-  const cartCount = getTotalItems();
+  const { carrito } = useCarrito();
+  const { productos } = useProductos();
   
   const isActive = (path) => location.pathname === path ? styles.active : '';
-  
+  const cartCount = carrito.filter(item => productos.find(p => p.id === item.id)).reduce((sum, item) => sum + item.cantidad, 0);
   return (
     <header className={styles.header}>
       <div className={styles.container}>
