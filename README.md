@@ -1,70 +1,251 @@
-# Getting Started with Create React App
+# RetroPixel Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Una tienda de videojuegos retro construida con React. Aplicación de e-commerce completamente funcional con gestión de productos, carrito de compras, autenticación UI y panel administrativo.
 
-## Available Scripts
+Sitio en vivo: https://AlejandroTGB.github.io/retropixel-store-react
 
-In the project directory, you can run:
+## Descripción del Proyecto
 
-### `npm start`
+RetroPixel Store es una aplicación React que recrea la experiencia de una tienda de videojuegos vintage. El proyecto fue migrado de vanilla HTML/CSS/JavaScript a React manteniendo la estética pixel art y agregando funcionalidades modernas como Context API para manejo de estado y React Router para navegación.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+La aplicación incluye:
+- Catálogo de productos
+- Carrito de compras con sincronización en tiempo real
+- Sistema de blog con artículos detallados
+- Panel de administración para gestionar productos
+- Páginas de autenticación (Login/Registro)
+- Página de contacto
+- Información de la empresa
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Requisitos e Instalación
 
-### `npm test`
+### Requisitos previos
+- Node.js v16 o superior
+- npm o yarn
+- Git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Instalación
 
-### `npm run build`
+1. Clona el repositorio:
+```bash
+git clone https://github.com/AlejandroTGB/retropixel-store-react.git
+cd retropixel-store-react
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Instala las dependencias:
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Inicia el servidor de desarrollo:
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+La aplicación se abrirá en http://localhost:3000
 
-### `npm run eject`
+## Cómo Usarlo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Comandos disponibles
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start          # Inicia servidor de desarrollo (puerto 3000)
+npm build          # Construye la app para producción
+npm deploy         # Construye y despliega a GitHub Pages
+npm test           # Ejecuta los tests
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Flujo de usuario
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Explorar productos**: Navega a "Juegos" para ver el catálogo completo
+2. **Agregar al carrito**: Haz clic en "Agregar al Carrito" en cualquier producto
+3. **Ver carrito**: Accede al carrito desde el navbar (muestra contador de items)
+4. **Admin panel**: Ve a "Admin" para crear, editar o eliminar productos
+5. **Blog**: Lee artículos retro en la sección de Blog
 
-## Learn More
+### Ejemplos de rutas
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Página de inicio con hero y productos destacados |
+| `/productos` | Catálogo completo de juegos |
+| `/blogs` | Lista de artículos |
+| `/blogs/:id` | Detalle de artículo específico |
+| `/contacto` | Formulario de contacto |
+| `/login` | Página de login |
+| `/registro` | Página de registro |
+| `/carrito` | Carrito de compras |
+| `/admin` | Panel administrativo |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Estructura del Proyecto
 
-### Code Splitting
+```
+src/
+  components/
+    Navbar.js              # Barra de navegación con contador de carrito
+    Footer.js              # Pie de página
+  
+  context/
+    ProductosContext.js    # Estado global de productos (CRUD)
+    CarritoContext.js      # Estado global del carrito
+  
+  pages/
+    home/                  # Página de inicio
+    productos/             # Catálogo de productos
+    carrito/               # Vista del carrito
+    blog/                  # Lista de artículos
+    detalleBlog/           # Artículo individual
+    contacto/              # Formulario de contacto
+    login/                 # Página de login
+    registro/              # Página de registro
+    admin/                 # Panel administrativo
+    nosotros/              # Página de la empresa
+  
+  data/
+    productos.json         # Base de datos de productos
+    blogs.json             # Base de datos de artículos
+  
+  assets/
+    Gif/                   # Imágenes GIF para fondos y productos
+    Blogs/                 # Imágenes de artículos
+    Logo/                  # Logos
+  
+  styles/
+    global.css             # Estilos globales y fuentes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+public/
+  index.html               # HTML principal
+  404.html                 # Para routing en GitHub Pages
+```
 
-### Analyzing the Bundle Size
+## Dependencias
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Dependencias principales
 
-### Making a Progressive Web App
+```json
+{
+  "react": "^19.2.0",              // Framework UI
+  "react-dom": "^19.2.0",          // Renderizado en DOM
+  "react-router-dom": "^7.9.4",    // Enrutamiento
+  "react-scripts": "5.0.1"         // Build tool (Create React App)
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Dependencias de desarrollo
 
-### Advanced Configuration
+```json
+{
+  "gh-pages": "^6.x",              // Despliegue a GitHub Pages
+  "@testing-library/react": "^16.3.0"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Arquitectura de Estado
 
-### Deployment
+### ProductosContext
+Maneja la lista global de productos. Métodos disponibles:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```javascript
+const { productos, agregarProducto, eliminarProducto, actualizarProducto } = useProductos();
 
-### `npm run build` fails to minify
+// agregarProducto(producto) - Agrega un nuevo producto
+// eliminarProducto(id) - Elimina un producto por ID
+// actualizarProducto(id, actualizado) - Actualiza datos del producto
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Estructura de producto:
+```javascript
+{
+  id: "super-mario-bros",
+  nombre: "Super Mario Bros",
+  precio: 29990,
+  imagen: "url/de/imagen.gif",
+  descripcion: "Descripción del juego"
+}
+```
+
+### CarritoContext
+Maneja el carrito de compras. Métodos disponibles:
+
+```javascript
+const { carrito, agregarProducto, eliminarProducto, actualizarCantidad, vaciarCarrito, getTotalItems } = useCarrito();
+```
+
+Sincronización: El carrito filtra automáticamente productos eliminados del admin usando:
+```javascript
+carrito.filter(item => productos.find(p => p.id === item.id))
+```
+
+## Decisiones Técnicas Importantes
+
+### 1. Context API
+
+Decisión: Usar Context API + useState para estado global.
+
+Justificación:
+- Proyecto pequeño a mediano (9 páginas)
+- Context API es nativo de React y suficiente para los casos de uso
+- Menos boilerplate, más fácil de mantener
+
+### 2. CSS Modules en lugar de Tailwind/styled-components
+
+Decisión: CSS Modules para cada página/componente.
+
+Justificación:
+- Evita conflictos de nombres globales
+- Facilita mantenimiento por componente
+- Control fino del styling sin dependencias externas
+- Compatible con la estética pixel art requerida
+
+### 3. Imágenes desde GitHub Raw en lugar de CDN externo
+
+Decisión: Cambiar de duroc-sa.github.io a GitHub Raw para activos.
+
+Justificación:
+- Centraliza todos los activos en el repositorio
+- Garantiza que los cambios se reflejen en la rama gh-pages
+- Evita dependencia de terceros
+
+### 4. Sin localStorage para estado (Context only)
+
+Decisión: Estado transitorio en Context (se borra al recargar).
+
+Justificación:
+- Evita sincronización complicada entre local y global
+- Adecuado para aplicación de demostración
+
+### 5. GitHub Pages con 404.html para routing
+
+Decisión: Usar archivo 404.html para capturar todas las rutas.
+
+Justificación:
+- GitHub Pages no soporta historial de HTML5 nativamente
+- 404.html redirige a index.html preservando la ruta
+- Script en index.html decodifica y restaura la URL
+- React Router maneja el resto del routing cliente
+
+## Despliegue
+
+El proyecto está configurado para desplegarse en GitHub Pages.
+
+
+## Características Futuras
+
+- Integración con backend API
+- Autenticación real con JWT
+- Búsqueda y filtrado de productos
+- Gestión de blog en admin
+- Carrito persistente
+- Notificaciones en tiempo real
+- Sistema de reviews de productos
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+## Contacto
+
+- GitHub: @AlejandroTGB
+- Email: contacto@retropixelstore.com
+
+---
