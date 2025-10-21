@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { useProductos } from "../../context/ProductosContext";
+import { useCarrito } from "../../context/CarritoContext";
 import styles from "./Productos.module.css";
 
 export default function Productos() {
   const { productos } = useProductos();
+  const { agregarProducto } = useCarrito();
 
   const handleAgregarCarrito = (producto) => {
+    agregarProducto(producto);
     alert(`${producto.nombre} agregado al carrito!`);
   };
 

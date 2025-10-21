@@ -1,8 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useCarrito } from '../context/CarritoContext';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const location = useLocation();
+  const { getTotalItems } = useCarrito();
+  const cartCount = getTotalItems();
   
   const isActive = (path) => location.pathname === path ? styles.active : '';
   
@@ -22,7 +25,7 @@ export default function Navbar() {
             <li><Link to="/login" className={isActive('/login')}>Login</Link></li>
             <li><Link to="/registro" className={isActive('/registro')}>Registro</Link></li>
             <li><Link to="/admin" className={isActive('/admin')}>Admin</Link></li>
-            <li><Link to="/carrito" className={isActive('/carrito')}>🛒</Link></li>
+            <li><Link to="/carrito" className={isActive('/carrito')}>🛒 {cartCount}</Link></li>
           </ul>
         </nav>
     

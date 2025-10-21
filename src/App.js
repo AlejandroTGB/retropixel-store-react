@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ProductosProvider } from './context/ProductosContext';
+import { CarritoProvider } from './context/CarritoContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/home/Home';
@@ -10,26 +11,29 @@ import DetalleBlog from './pages/detalleBlog/DetalleBlog';
 import Contacto from './pages/contacto/Contacto';
 import Login from './pages/login/Login';
 import Registro from './pages/registro/Registro';
+import Carrito from './pages/carrito/Carrito';
 
 function App() {
   return (
+<CarritoProvider>
   <ProductosProvider>
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productos" element={<Productos />} />
-        <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/blogs" element={<Blog />} />
         <Route path="/blogs/:id" element={<DetalleBlog />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/carrito" element={<div>CARRITO - Por crear</div>} />
+        <Route path="/admin" element={<div>ADMIN - Por crear</div>} />
+        <Route path="/carrito" element={<Carrito />} />
       </Routes>
       <Footer />
     </Router>
   </ProductosProvider>
+</CarritoProvider>
   );
 }
 
