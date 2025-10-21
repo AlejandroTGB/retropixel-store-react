@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/retropixel-store-react/static/css/main.3026ebd9.css",
+    "main.js": "/retropixel-store-react/static/js/main.9f377945.js",
+    "index.html": "/retropixel-store-react/index.html",
+    "main.3026ebd9.css.map": "/retropixel-store-react/static/css/main.3026ebd9.css.map",
+    "main.9f377945.js.map": "/retropixel-store-react/static/js/main.9f377945.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3026ebd9.css",
+    "static/js/main.9f377945.js"
+  ]
+}
