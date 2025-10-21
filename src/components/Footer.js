@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>&copy; 2025 RetroPixel Store. Todos los derechos reservados.</p>
+          <p>&copy; 2025 RetroPixel Store. DuocUC.</p>
         </div>
       </div>
     </footer>
