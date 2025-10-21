@@ -18,7 +18,7 @@ function App() {
   return (
 <CarritoProvider>
   <ProductosProvider>
-    <Router>
+    <Router basename="/retropixel-store-react">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
