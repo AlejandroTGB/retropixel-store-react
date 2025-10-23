@@ -10,7 +10,7 @@
 
 .heroHomepage {
   background: linear-gradient(rgba(36, 41, 56, 0.6), rgba(36, 41, 56, 0.6)), 
-    url('/assets/Gif/homepagegif.gif');
+    url('https://raw.githubusercontent.com/AlejandroTGB/retropixel-store-react/master/src/assets/Gif/homepagegif.gif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
