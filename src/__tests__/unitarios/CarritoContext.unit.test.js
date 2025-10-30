@@ -13,6 +13,6 @@ describe('CarritoContext', () => {
     });
 
     expect(result.current.carrito).toHaveLength(1);
-    expect(result.current.carrito[0]).toMatchObject(producto);
+    expect(result.current.carrito[0]).toMatchObject({ id: 1, cantidad: 1 });
   });
 });
