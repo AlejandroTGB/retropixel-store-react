@@ -16,8 +16,8 @@ import Admin from './pages/admin/Admin';
 
 function App() {
   return (
-<CarritoProvider>
-  <ProductosProvider>
+<ProductosProvider>
+  <CarritoProvider>
     <Router basename="/retropixel-store-react">
       <Navbar />
       <Routes>
@@ -33,8 +33,8 @@ function App() {
       </Routes>
       <Footer />
     </Router>
-  </ProductosProvider>
-</CarritoProvider>
+  </CarritoProvider>
+</ProductosProvider>
   );
 }
 

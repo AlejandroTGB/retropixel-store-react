@@ -7,9 +7,16 @@ export default function Carrito() {
   const { carrito, eliminarProducto, actualizarCantidad, vaciarCarrito } = useCarrito();
   const { productos } = useProductos();
 
+  const carritoConDetalles = carrito.map(item => {
+    const productoActual = productos.find(p => p.id === item.id);
+    return {
+      ...productoActual,
+      cantidad: item.cantidad
+    };
+  });
+
   const calcularTotal = () => {
-    return carrito
-      .filter(item => productos.find(p => p.id === item.id))
+    return carritoConDetalles
       .reduce((total, item) => total + (item.precio * item.cantidad), 0);
   };
 
@@ -46,7 +53,7 @@ export default function Carrito() {
                     </tr>
                   </thead>
                   <tbody>
-                    {carrito.filter(item => productos.find(p => p.id === item.id)).map(item => (
+                    {carritoConDetalles.map(item => (
                       <tr key={item.id}>
                         <td className={styles.nombreProducto}>{item.nombre}</td>
                         <td>${item.precio.toLocaleString()}</td>
@@ -92,7 +99,7 @@ export default function Carrito() {
 
                   <div className={styles.resumenRow}>
                     <span>Total Productos:</span>
-                    <span>{carrito.filter(item => productos.find(p => p.id === item.id)).reduce((sum, item) => sum + item.cantidad, 0)}</span>
+                    <span>{carritoConDetalles.reduce((sum, item) => sum + item.cantidad, 0)}</span>
                   </div>
 
                   <div className={styles.totalFinal}>

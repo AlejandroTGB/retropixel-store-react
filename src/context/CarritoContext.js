@@ -15,7 +15,7 @@ export function CarritoProvider({ children }) {
           : item
       ));
     } else {
-      setCarrito([...carrito, { ...producto, cantidad: 1 }]);
+      setCarrito([...carrito, { id: producto.id, cantidad: 1 }]);
     }
   };
 
@@ -49,7 +49,7 @@ export function CarritoProvider({ children }) {
       eliminarProducto, 
       actualizarCantidad,
       vaciarCarrito, 
-      getTotalItems 
+      getTotalItems
     }}>
       {children}
     </CarritoContext.Provider>
