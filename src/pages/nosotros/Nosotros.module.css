@@ -10,7 +10,7 @@
 
 .heroNosotros {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(36, 41, 56, 0.3)), 
-    url('https://raw.githubusercontent.com/AlejandroTGB/retropixel-store-react/master/src/assets/Gif/waos.gif');
+    url('https://raw.githubusercontent.com/AlejandroTGB/retropixel-store-react/master/src/assets/Gif/nosotrosbanner.gif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@
 
 .heroNosotros p {
   font-size: 18px;
-  color: #a0a6c1;
+  color: #ffffff;
   margin-bottom: 30px;
 }
 

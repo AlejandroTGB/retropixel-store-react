@@ -10,7 +10,7 @@
 
 .heroContacto {
   background: linear-gradient(rgba(36, 41, 56, 0.3), rgba(36, 41, 56, 0.3)),
-    url('https://raw.githubusercontent.com/AlejandroTGB/retropixel-store-react/master/src/assets/Gif/blogs.gif');
+    url('https://raw.githubusercontent.com/AlejandroTGB/retropixel-store-react/master/src/assets/Gif/giftcontacto.gif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@
 
 .heroContacto p {
   font-size: 18px;
-  color: #a0a6c1;
+  color: #e1e2eb;
 }
 
 .contactoWrapper {

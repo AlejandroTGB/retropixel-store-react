@@ -30,16 +30,22 @@
 .navList {
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
 .navList li {
     margin-right: 30px;
 }
 
+.navList li:last-child {
+    margin-right: 0;
+}
+
 .navList a {
     text-decoration: none;
     color: #a0a6c1;
     font-size: 16px;
+    white-space: nowrap;
 }
 
 .navList a:hover {
