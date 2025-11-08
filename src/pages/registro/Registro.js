@@ -1,20 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Registro.module.css';
+import { authService } from '../../services/authService';
 
 export default function Registro() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    username: '',
+    nombre: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    birthDate: '',
-    favoriteGenre: '',
-    newsletter: true,
-    terms: false,
-    privacy: false
+    confirmPassword: ''
   });
 
   const [registrado, setRegistrado] = useState(false);
@@ -55,25 +49,13 @@ export default function Registro() {
       return;
     }
 
-    if (!formData.terms || !formData.privacy) {
-      alert('Debes aceptar los términos y condiciones');
-      return;
-    }
-
-    console.log('Registro:', formData);
+    authService.registro(formData.nombre, formData.email, formData.password);
     setRegistrado(true);
     setFormData({
-      firstName: '',
-      lastName: '',
-      username: '',
+      nombre: '',
       email: '',
       password: '',
-      confirmPassword: '',
-      birthDate: '',
-      favoriteGenre: '',
-      newsletter: true,
-      terms: false,
-      privacy: false
+      confirmPassword: ''
     });
     setPasswordStrength(0);
   };
@@ -133,45 +115,17 @@ export default function Registro() {
               )}
 
               <form className={styles.formRegister} onSubmit={handleSubmit}>
-                <div className={styles.formRow}>
-                  <div className={`${styles.formGroup} ${styles.halfWidth}`}>
-                    <label htmlFor="firstName">👤 Nombre</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      placeholder="Tu nombre"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className={`${styles.formGroup} ${styles.halfWidth}`}>
-                    <label htmlFor="lastName">👥 Apellido</label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      placeholder="Tu apellido"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-
                 <div className={styles.formGroup}>
-                  <label htmlFor="username">🎮 Nombre de Usuario</label>
+                  <label htmlFor="nombre">👤 Nombre Completo</label>
                   <input
                     type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Tu nombre gamer"
-                    value={formData.username}
+                    id="nombre"
+                    name="nombre"
+                    placeholder="Tu nombre completo"
+                    value={formData.nombre}
                     onChange={handleChange}
                     required
                   />
-                  <small className={styles.fieldHint}>Será visible para otros usuarios</small>
                 </div>
 
                 <div className={styles.formGroup}>
@@ -229,75 +183,6 @@ export default function Registro() {
                       required
                     />
                   </div>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label htmlFor="birthDate">🎂 Fecha de Nacimiento</label>
-                  <input
-                    type="date"
-                    id="birthDate"
-                    name="birthDate"
-                    value={formData.birthDate}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label htmlFor="favoriteGenre">🎯 Género de Juego Favorito</label>
-                  <select
-                    id="favoriteGenre"
-                    name="favoriteGenre"
-                    value={formData.favoriteGenre}
-                    onChange={handleChange}
-                  >
-                    <option value="">Selecciona tu género favorito</option>
-                    <option value="platformer">🍄 Plataformas</option>
-                    <option value="rpg">🗡️ RPG</option>
-                    <option value="action">⚡ Acción</option>
-                    <option value="puzzle">🧩 Puzzle</option>
-                    <option value="racing">🏁 Carreras</option>
-                    <option value="fighting">🥊 Lucha</option>
-                    <option value="shooter">🔫 Disparos</option>
-                    <option value="adventure">🗺️ Aventura</option>
-                  </select>
-                </div>
-
-                <div className={styles.formCheckboxes}>
-                  <label className={styles.checkboxContainer}>
-                    <input
-                      type="checkbox"
-                      name="newsletter"
-                      checked={formData.newsletter}
-                      onChange={handleChange}
-                    />
-                    <span className={styles.checkmark}></span>
-                    📬 Recibir newsletter con ofertas y novedades
-                  </label>
-
-                  <label className={styles.checkboxContainer}>
-                    <input
-                      type="checkbox"
-                      name="terms"
-                      checked={formData.terms}
-                      onChange={handleChange}
-                      required
-                    />
-                    <span className={styles.checkmark}></span>
-                    Acepto los <a href="#" className={styles.termsLink}>términos y condiciones</a>
-                  </label>
-
-                  <label className={styles.checkboxContainer}>
-                    <input
-                      type="checkbox"
-                      name="privacy"
-                      checked={formData.privacy}
-                      onChange={handleChange}
-                      required
-                    />
-                    <span className={styles.checkmark}></span>
-                    Acepto la <a href="#" className={styles.termsLink}>política de privacidad</a>
-                  </label>
                 </div>
 
                 <button type="submit" className={styles.btnRegister}>🎮 Crear Mi Cuenta</button>
