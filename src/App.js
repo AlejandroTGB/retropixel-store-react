@@ -3,6 +3,7 @@ import { ProductosProvider } from './context/ProductosContext';
 import { CarritoProvider } from './context/CarritoContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/home/Home';
 import Productos from './pages/productos/Productos';
 import Nosotros from './pages/nosotros/Nosotros';
@@ -29,7 +30,7 @@ function App() {
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/carrito" element={<Carrito />} />
       </Routes>
       <Footer />
