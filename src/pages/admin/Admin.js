@@ -12,6 +12,8 @@ export default function Admin() {
     descripcion: '',
     imagen: ''
   });
+  const [cargando, setCargando] = useState(false);
+  const [mensajeError, setMensajeError] = useState(null);
 
   const handleAbrirFormulario = (producto = null) => {
     if (producto) {
@@ -28,6 +30,7 @@ export default function Admin() {
     setMostrarFormulario(false);
     setProductoEditando(null);
     setFormData({ nombre: '', precio: '', descripcion: '', imagen: '' });
+    setMensajeError(null);
   };
 
   const handleChange = (e) => {
@@ -35,39 +38,60 @@ export default function Admin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!formData.nombre || !formData.precio || !formData.descripcion) {
-      alert('Por favor completa todos los campos');
+      setMensajeError('Por favor completa todos los campos');
       return;
     }
 
-    if (productoEditando) {
-      actualizarProducto(productoEditando.id, {
-        ...formData,
-        precio: parseInt(formData.precio),
-        id: productoEditando.id
-      });
-    } else {
-      const nuevoProducto = {
-        id: `producto-${Date.now()}`,
-        nombre: formData.nombre,
-        precio: parseInt(formData.precio),
-        descripcion: formData.descripcion,
-        imagen: formData.imagen || 'https://via.placeholder.com/200'
-      };
-      agregarProducto(nuevoProducto);
-    }
+    try {
+      setCargando(true);
+      setMensajeError(null);
 
-    handleCerrarFormulario();
+      if (productoEditando) {
+        await actualizarProducto(productoEditando.id, {
+          ...formData,
+          precio: parseInt(formData.precio),
+          id: productoEditando.id
+        });
+        alert('Producto actualizado exitosamente');
+      } else {
+        const nuevoProducto = {
+          nombre: formData.nombre,
+          precio: parseInt(formData.precio),
+          descripcion: formData.descripcion,
+          imagen: formData.imagen || 'https://via.placeholder.com/200'
+        };
+        await agregarProducto(nuevoProducto);
+        alert('Producto creado exitosamente');
+      }
+
+      handleCerrarFormulario();
+    } catch (error) {
+      setMensajeError(error.message || 'Error al guardar el producto');
+      console.error('Error:', error);
+    } finally {
+      setCargando(false);
+    }
   };
 
-  const handleEliminar = (id) => {
-  if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-    eliminarProducto(id);
-  }
-};
+  const handleEliminar = async (id) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+      try {
+        setCargando(true);
+        setMensajeError(null);
+        await eliminarProducto(id);
+        alert('Producto eliminado exitosamente');
+      } catch (error) {
+        setMensajeError(error.message || 'Error al eliminar el producto');
+        console.error('Error:', error);
+      } finally {
+        setCargando(false);
+      }
+    }
+  };
 
   return (
     <main className={styles.main}>
@@ -115,6 +139,7 @@ export default function Admin() {
                         <button
                           onClick={() => handleEliminar(producto.id)}
                           className={styles.btnEliminarAdmin}
+                          disabled={cargando}
                         >
                            Eliminar
                         </button>
@@ -137,6 +162,12 @@ export default function Admin() {
             </div>
 
             <form onSubmit={handleSubmit} className={styles.formularioAdmin}>
+              {mensajeError && (
+                <div className={styles.errorMessage}>
+                  {mensajeError}
+                </div>
+              )}
+
               <div className={styles.formGroup}>
                 <label htmlFor="nombre">Nombre</label>
                 <input
@@ -189,10 +220,19 @@ export default function Admin() {
               </div>
 
               <div className={styles.modalButtons}>
-                <button type="submit" className={styles.btnGuardar}>
-                  💾 Guardar Producto
+                <button 
+                  type="submit" 
+                  className={styles.btnGuardar}
+                  disabled={cargando}
+                >
+                  {cargando ? 'Guardando...' : 'Guardar Producto'}
                 </button>
-                <button type="button" onClick={handleCerrarFormulario} className={styles.btnCancelar}>
+                <button 
+                  type="button" 
+                  onClick={handleCerrarFormulario} 
+                  className={styles.btnCancelar}
+                  disabled={cargando}
+                >
                   Cancelar
                 </button>
               </div>
