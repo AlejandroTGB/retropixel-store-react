@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
 import { useProductos } from '../context/ProductosContext';
 import { authService } from '../services/authService';
@@ -6,6 +6,7 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { carrito } = useCarrito();
   const { productos } = useProductos();
   const token = authService.getToken();
@@ -22,6 +23,11 @@ export default function Navbar() {
   
   const isActive = (path) => location.pathname === path ? styles.active : '';
   const cartCount = carrito.filter(item => productos.find(p => p.id === item.id)).reduce((sum, item) => sum + item.cantidad, 0);
+  
+  const handleLogout = () => {
+    authService.logout();
+    navigate('/');
+  };
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -44,7 +50,7 @@ export default function Navbar() {
             {token && (
               <>
                 {isAdmin && <li><Link to="/admin" className={isActive('/admin')}>Admin</Link></li>}
-                <li><button onClick={() => { authService.logout(); window.location.reload(); }} className={styles.logoutBtn}>Cerrar Sesión</button></li>
+                <li><button onClick={handleLogout} className={styles.logoutBtn}>Cerrar Sesión</button></li>
               </>
             )}
             <li><Link to="/carrito" className={isActive('/carrito')}>🛒 {cartCount}</Link></li>
