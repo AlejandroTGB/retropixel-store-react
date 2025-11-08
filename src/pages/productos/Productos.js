@@ -4,7 +4,7 @@ import { useCarrito } from "../../context/CarritoContext";
 import styles from "./Productos.module.css";
 
 export default function Productos() {
-  const { productos } = useProductos();
+  const { productos, loading, error } = useProductos();
   const { agregarProducto } = useCarrito();
 
   const handleAgregarCarrito = (producto) => {
@@ -24,22 +24,29 @@ export default function Productos() {
       <section className={styles.productosSection}>
         <div className={styles.container}>
           <h2>Todos Nuestros Productos</h2>
-          <div className={styles.productosGrid}>
-            {productos.map(producto => (
-              <article key={producto.id} className={styles.productoCard}>
-                <img src={producto.imagen} alt={producto.nombre} />
-                <h3>{producto.nombre}</h3>
-                <p className={styles.precio}>${producto.precio.toLocaleString()}</p>
-                <p className={styles.descripcion}>{producto.descripcion}</p>
-                <button
-                  className={styles.btnSecondary}
-                  onClick={() => handleAgregarCarrito(producto)}
-                >
-                  Agregar al Carrito
-                </button>
-              </article>
-            ))}
-          </div>
+          {error && (
+            <p className={styles.error}>Error al cargar productos: {error}</p>
+          )}
+          {loading ? (
+            <p className={styles.cargando}>Cargando productos...</p>
+          ) : (
+            <div className={styles.productosGrid}>
+              {productos.map(producto => (
+                <article key={producto.id} className={styles.productoCard}>
+                  <img src={producto.imagen} alt={producto.nombre} />
+                  <h3>{producto.nombre}</h3>
+                  <p className={styles.precio}>${producto.precio.toLocaleString()}</p>
+                  <p className={styles.descripcion}>{producto.descripcion}</p>
+                  <button
+                    className={styles.btnSecondary}
+                    onClick={() => handleAgregarCarrito(producto)}
+                  >
+                    Agregar al Carrito
+                  </button>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
