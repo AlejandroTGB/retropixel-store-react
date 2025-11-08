@@ -1,23 +1,61 @@
-import { createContext, useContext, useState } from 'react';
-import productos from '../data/productos.json';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { productService } from '../services/productService';
 
 const ProductosContext = createContext();
 
 export function ProductosProvider({ children }) {
-  const [productosState, setProductosState] = useState(productos);
+  const [productosState, setProductosState] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const agregarProducto = (nuevoProducto) => {
-    setProductosState([...productosState, nuevoProducto]);
+  useEffect(() => {
+    const cargarProductos = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const productosDelBackend = await productService.obtenerProductos();
+        setProductosState(productosDelBackend);
+      } catch (err) {
+        setError(err.message);
+        console.error('Error al cargar productos:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    cargarProductos();
+  }, []);
+
+  const agregarProducto = async (nuevoProducto) => {
+    try {
+      const productoCreado = await productService.crearProducto(nuevoProducto);
+      setProductosState([...productosState, productoCreado]);
+    } catch (err) {
+      console.error('Error al crear producto:', err);
+      throw err;
+    }
   };
 
-  const eliminarProducto = (id) => {
-    setProductosState(productosState.filter(p => p.id !== id));
+  const eliminarProducto = async (id) => {
+    try {
+      await productService.eliminarProducto(id);
+      setProductosState(productosState.filter(p => p.id !== id));
+    } catch (err) {
+      console.error('Error al eliminar producto:', err);
+      throw err;
+    }
   };
 
-  const actualizarProducto = (id, productoActualizado) => {
-    setProductosState(productosState.map(p => 
-      p.id === id ? { ...p, ...productoActualizado } : p
-    ));
+  const actualizarProducto = async (id, productoActualizado) => {
+    try {
+      const productoActualizadoDelBackend = await productService.actualizarProducto(id, productoActualizado);
+      setProductosState(productosState.map(p => 
+        p.id === id ? productoActualizadoDelBackend : p
+      ));
+    } catch (err) {
+      console.error('Error al actualizar producto:', err);
+      throw err;
+    }
   };
 
   const value = {
@@ -25,7 +63,9 @@ export function ProductosProvider({ children }) {
     setProductos: setProductosState,
     agregarProducto,
     eliminarProducto,
-    actualizarProducto
+    actualizarProducto,
+    loading,
+    error
   };
 
   return (
