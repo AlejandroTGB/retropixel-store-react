@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
+import { authService } from '../../services/authService';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  const [logueado, setLogueado] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [mostrarPassword, setMostrarPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -18,16 +21,25 @@ export default function Login() {
       [name]: value
     });
 
-    if (logueado) {
-      setLogueado(false);
+    if (error) {
+      setError(null);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login:', formData);
-    setLogueado(true);
-    setFormData({ email: '', password: '' });
+    setLoading(true);
+    setError(null);
+
+    try {
+      await authService.login(formData.email, formData.password);
+      setFormData({ email: '', password: '' });
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.mensaje || 'Error en el inicio de sesión');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const togglePassword = () => {
@@ -43,9 +55,9 @@ export default function Login() {
               <h2>🎮 Iniciar Sesión</h2>
               <p className={styles.loginSubtitle}>¡Bienvenido de vuelta, gamer!</p>
 
-              {logueado && (
-                <div className={styles.mensajeExito}>
-                  Sesión iniciada correctamente. Bienvenido!
+              {error && (
+                <div className={styles.mensajeError}>
+                  {error}
                 </div>
               )}
 
@@ -93,10 +105,12 @@ export default function Login() {
                     <span className={styles.checkmark}></span>
                     Recordarme
                   </label>
-                  <a href="#" className={styles.forgotPassword}>¿Olvidaste tu contraseña?</a>
+                  <button type="button" className={styles.forgotPassword}>¿Olvidaste tu contraseña?</button>
                 </div>
 
-                <button type="submit" className={styles.btnLogin}>🚀 Iniciar Sesión</button>
+                <button type="submit" className={styles.btnLogin} disabled={loading}>
+                  {loading ? '⏳ Iniciando...' : '🚀 Iniciar Sesión'}
+                </button>
               </form>
 
               <div className={styles.loginDivider}>
