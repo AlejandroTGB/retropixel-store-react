@@ -304,3 +304,13 @@
     width: 95%;
   }
 }
+
+.errorMessage {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  font-family: 'PixelGrid', sans-serif;
+}
