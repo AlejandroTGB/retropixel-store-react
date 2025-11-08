@@ -115,3 +115,21 @@
 .btnSecondary:hover {
   background-color: #6c757d;
 }
+
+.cargando {
+  text-align: center;
+  font-size: 18px;
+  color: #a0a6c1;
+  padding: 40px 20px;
+}
+
+.error {
+  text-align: center;
+  font-size: 18px;
+  color: #e74c3c;
+  padding: 40px 20px;
+  background-color: #1a1d2a;
+  border: 1px solid #e74c3c;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
