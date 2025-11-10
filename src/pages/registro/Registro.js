@@ -50,6 +50,7 @@ export default function Registro() {
     }
 
     authService.registro(formData.nombre, formData.email, formData.password);
+    localStorage.removeItem('carritoInvitado');
     setRegistrado(true);
     setFormData({
       nombre: '',
@@ -58,6 +59,10 @@ export default function Registro() {
       confirmPassword: ''
     });
     setPasswordStrength(0);
+    
+    setTimeout(() => {
+      window.location.href = '/retropixel-store-react/';
+    }, 1500);
   };
 
   return (
