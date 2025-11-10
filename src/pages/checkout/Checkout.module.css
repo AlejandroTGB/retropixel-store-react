@@ -1,0 +1,230 @@
+.main {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.checkoutSection {
+  padding: 20px 0;
+}
+
+.checkoutSection h2 {
+  font-size: 36px;
+  color: #ffffff;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.checkoutContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.resumenPedido {
+  background-color: #1a1d2a;
+  border: 1px solid #3a3f5c;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.resumenPedido h3 {
+  color: #ffffff;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.productosCheckout {
+  margin-bottom: 30px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.itemCheckout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #252930;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #3a3f5c;
+}
+
+.infoProducto {
+  flex: 1;
+}
+
+.nombreProducto {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.cantidadProducto {
+  color: #a0a6c1;
+  font-size: 14px;
+  margin: 0;
+}
+
+.precioProducto {
+  color: #3b8cc9;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  text-align: right;
+}
+
+.detallesTotal {
+  padding-top: 20px;
+  border-top: 1px solid #3a3f5c;
+}
+
+.fila {
+  display: flex;
+  justify-content: space-between;
+  color: #a0a6c1;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.filaTotal {
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #3a3f5c;
+}
+
+.formularioPago {
+  background-color: #1a1d2a;
+  border: 1px solid #3a3f5c;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.formularioPago h3 {
+  color: #ffffff;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  color: #a0a6c1;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 12px;
+  background-color: #2a2e3e;
+  border: 1px solid #3a3f5c;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'PixelGrid', sans-serif;
+}
+
+.formGroup input::placeholder {
+  color: #6a7080;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #3b8cc9;
+  box-shadow: 0 0 8px rgba(59, 140, 201, 0.3);
+}
+
+.displayField {
+  padding: 12px;
+  background-color: #2a2e3e;
+  border: 1px solid #3a3f5c;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.mensajeError {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.btnConfirmar {
+  width: 100%;
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.btnConfirmar:hover {
+  background-color: #218838;
+}
+
+.btnConfirmar:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.btnVolver {
+  width: 100%;
+  background-color: #495057;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.3s;
+}
+
+.btnVolver:hover {
+  background-color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .checkoutContent {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .resumenPedido,
+  .formularioPago {
+    padding: 20px;
+  }
+
+  .productosCheckout {
+    max-height: 250px;
+  }
+}
