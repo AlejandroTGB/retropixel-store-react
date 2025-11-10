@@ -33,6 +33,7 @@ export default function Login() {
 
     try {
       await authService.login(formData.email, formData.password);
+      localStorage.removeItem('carritoInvitado');
       setFormData({ email: '', password: '' });
       navigate('/');
     } catch (err) {
