@@ -223,6 +223,83 @@
   background-color: #6c757d;
 }
 
+.checkoutForm {
+  background-color: #1a1d2a;
+  border: 1px solid #3a3f5c;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.checkoutForm h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  color: #a0a6c1;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 10px;
+  background-color: #2a2e3e;
+  border: 1px solid #3a3f5c;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'PixelGrid', sans-serif;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #3b8cc9;
+  box-shadow: 0 0 5px rgba(59, 140, 201, 0.3);
+}
+
+.btnConfirmar {
+  width: 100%;
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+  font-family: 'PixelGrid', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.btnConfirmar:hover {
+  background-color: #218838;
+}
+
+.btnConfirmar:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.mensajeError {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
   .carritoContent {
     flex-direction: column;
