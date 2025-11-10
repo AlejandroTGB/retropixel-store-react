@@ -1,6 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
-import { useProductos } from '../context/ProductosContext';
 import { authService } from '../services/authService';
 import styles from './Navbar.module.css';
 
@@ -8,7 +7,6 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { carrito } = useCarrito();
-  const { productos } = useProductos();
   const token = authService.getToken();
   
   let isAdmin = false;
@@ -22,10 +20,13 @@ export default function Navbar() {
   }
   
   const isActive = (path) => location.pathname === path ? styles.active : '';
-  const cartCount = carrito.filter(item => productos.find(p => p.id === item.id)).reduce((sum, item) => sum + item.cantidad, 0);
+  const cartCount = Array.isArray(carrito) 
+    ? carrito.reduce((sum, item) => sum + (item.cantidad || 0), 0)
+    : 0;
   
   const handleLogout = () => {
     authService.logout();
+    localStorage.removeItem('carritoInvitado');
     navigate('/');
   };
   return (
