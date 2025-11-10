@@ -13,6 +13,7 @@ import Contacto from './pages/contacto/Contacto';
 import Login from './pages/login/Login';
 import Registro from './pages/registro/Registro';
 import Carrito from './pages/carrito/Carrito';
+import Checkout from './pages/checkout/Checkout';
 import Admin from './pages/admin/Admin';
 
 function App() {
@@ -30,8 +31,9 @@ function App() {
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
       </Routes>
       <Footer />
     </Router>
