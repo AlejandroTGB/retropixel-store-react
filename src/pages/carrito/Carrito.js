@@ -1,19 +1,19 @@
 import styles from './Carrito.module.css';
 import { useCarrito } from '../../context/CarritoContext';
-import { useProductos } from '../../context/ProductosContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Carrito() {
+  const navigate = useNavigate();
   const { carrito, eliminarProducto, actualizarCantidad, vaciarCarrito } = useCarrito();
-  const { productos } = useProductos();
 
   const carritoConDetalles = carrito.map(item => {
-    const productoActual = productos.find(p => p.id === item.id);
     return {
-      ...productoActual,
+      id: item.productoId || item.id,
+      nombre: item.nombre,
+      precio: item.precio,
       cantidad: item.cantidad
     };
-  });
+  }).filter(item => item.nombre);
 
   const calcularTotal = () => {
     return carritoConDetalles
@@ -26,6 +26,10 @@ export default function Carrito() {
     if (window.confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
       vaciarCarrito();
     }
+  };
+
+  const handleProcederPago = () => {
+    navigate('/checkout');
   };
 
   return (
@@ -93,11 +97,6 @@ export default function Carrito() {
                   </div>
 
                   <div className={styles.resumenRow}>
-                    <span>Envío:</span>
-                    <span>Gratis</span>
-                  </div>
-
-                  <div className={styles.resumenRow}>
                     <span>Total Productos:</span>
                     <span>{carritoConDetalles.reduce((sum, item) => sum + item.cantidad, 0)}</span>
                   </div>
@@ -107,7 +106,12 @@ export default function Carrito() {
                     <span className={styles.precioTotal}>${total.toLocaleString()}</span>
                   </div>
 
-                  <button className={styles.btnComprar}> Proceder al Pago</button>
+                  <button 
+                    onClick={handleProcederPago} 
+                    className={styles.btnComprar}
+                  >
+                    Proceder al Pago
+                  </button>
                   <button onClick={handleVaciar} className={styles.btnVaciar}>
                     Vaciar Carrito
                   </button>
