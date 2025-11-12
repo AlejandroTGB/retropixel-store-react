@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import { authService } from '../../services/authService';
@@ -13,6 +13,18 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [mostrarPassword, setMostrarPassword] = useState(false);
+  const [recordarme, setRecordarme] = useState(false);
+
+  useEffect(() => {
+    const emailGuardado = localStorage.getItem('emailRecordado');
+    if (emailGuardado) {
+      setFormData(prev => ({
+        ...prev,
+        email: emailGuardado
+      }));
+      setRecordarme(true);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +46,13 @@ export default function Login() {
     try {
       await authService.login(formData.email, formData.password);
       localStorage.removeItem('carritoInvitado');
+      
+      if (recordarme) {
+        localStorage.setItem('emailRecordado', formData.email);
+      } else {
+        localStorage.removeItem('emailRecordado');
+      }
+      
       setFormData({ email: '', password: '' });
       navigate('/');
     } catch (err) {
@@ -102,7 +121,12 @@ export default function Login() {
 
                 <div className={styles.formOptions}>
                   <label className={styles.checkboxContainer}>
-                    <input type="checkbox" name="remember" />
+                    <input 
+                      type="checkbox" 
+                      name="remember" 
+                      checked={recordarme}
+                      onChange={(e) => setRecordarme(e.target.checked)}
+                    />
                     <span className={styles.checkmark}></span>
                     Recordarme
                   </label>
