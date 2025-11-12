@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Admin.module.css';
 import { useProductos } from '../../context/ProductosContext';
+import Toast from '../../components/Toast';
 
 export default function Admin() {
   const { productos, agregarProducto, eliminarProducto, actualizarProducto } = useProductos();
@@ -14,6 +15,7 @@ export default function Admin() {
   });
   const [cargando, setCargando] = useState(false);
   const [mensajeError, setMensajeError] = useState(null);
+  const [toast, setToast] = useState(null);
 
   const handleAbrirFormulario = (producto = null) => {
     if (producto) {
@@ -56,7 +58,7 @@ export default function Admin() {
           precio: parseInt(formData.precio),
           id: productoEditando.id
         });
-        alert('Producto actualizado exitosamente');
+        setToast({ mensaje: 'Producto actualizado exitosamente', tipo: 'exito' });
       } else {
         const nuevoProducto = {
           nombre: formData.nombre,
@@ -65,12 +67,12 @@ export default function Admin() {
           imagen: formData.imagen || 'https://via.placeholder.com/200'
         };
         await agregarProducto(nuevoProducto);
-        alert('Producto creado exitosamente');
+        setToast({ mensaje: 'Producto creado exitosamente', tipo: 'exito' });
       }
 
       handleCerrarFormulario();
     } catch (error) {
-      setMensajeError(error.message || 'Error al guardar el producto');
+      setToast({ mensaje: error.message || 'Error al guardar el producto', tipo: 'error' });
       console.error('Error:', error);
     } finally {
       setCargando(false);
@@ -83,9 +85,9 @@ export default function Admin() {
         setCargando(true);
         setMensajeError(null);
         await eliminarProducto(id);
-        alert('Producto eliminado exitosamente');
+        setToast({ mensaje: 'Producto eliminado exitosamente', tipo: 'exito' });
       } catch (error) {
-        setMensajeError(error.message || 'Error al eliminar el producto');
+        setToast({ mensaje: error.message || 'Error al eliminar el producto', tipo: 'error' });
         console.error('Error:', error);
       } finally {
         setCargando(false);
@@ -239,6 +241,13 @@ export default function Admin() {
             </form>
           </div>
         </div>
+      )}
+      {toast && (
+        <Toast 
+          mensaje={toast.mensaje} 
+          tipo={toast.tipo}
+          onClose={() => setToast(null)}
+        />
       )}
     </main>
   );
