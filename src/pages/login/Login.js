@@ -14,6 +14,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [recordarme, setRecordarme] = useState(false);
+  const [cargandoSocial, setCargandoSocial] = useState(null);
 
   useEffect(() => {
     const emailGuardado = localStorage.getItem('emailRecordado');
@@ -25,6 +26,25 @@ export default function Login() {
       setRecordarme(true);
     }
   }, []);
+
+  const handleSocialLogin = async (platform) => {
+    setCargandoSocial(platform);
+    
+    try {
+      const email = `player_${platform}_${Date.now()}@retropixel.com`;
+      const nombre = `${platform.charAt(0).toUpperCase() + platform.slice(1)} Player`;
+      
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      await authService.login(email, '123456');
+      localStorage.removeItem('carritoInvitado');
+      setFormData({ email: '', password: '' });
+      navigate('/');
+    } catch (err) {
+      setError(`Error al iniciar sesión con ${platform}`);
+      setCargandoSocial(null);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -143,14 +163,38 @@ export default function Login() {
                 <span>o continúa con</span>
               </div>
 
+              {cargandoSocial && (
+                <div className={styles.modalCargando}>
+                  <div className={styles.contenidoCargando}>
+                    <div className={styles.spinner}></div>
+                    <p>Iniciando sesión con {cargandoSocial.charAt(0).toUpperCase() + cargandoSocial.slice(1)}...</p>
+                  </div>
+                </div>
+              )}
+
               <div className={styles.socialLogin}>
-                <button type="button" className={`${styles.btnSocial} ${styles.google}`}>
+                <button 
+                  type="button" 
+                  className={`${styles.btnSocial} ${styles.google}`}
+                  onClick={() => handleSocialLogin('google')}
+                  disabled={cargandoSocial}
+                >
                   Google
                 </button>
-                <button type="button" className={`${styles.btnSocial} ${styles.facebook}`}>
+                <button 
+                  type="button" 
+                  className={`${styles.btnSocial} ${styles.facebook}`}
+                  onClick={() => handleSocialLogin('facebook')}
+                  disabled={cargandoSocial}
+                >
                   Facebook
                 </button>
-                <button type="button" className={`${styles.btnSocial} ${styles.discord}`}>
+                <button 
+                  type="button" 
+                  className={`${styles.btnSocial} ${styles.discord}`}
+                  onClick={() => handleSocialLogin('discord')}
+                  disabled={cargandoSocial}
+                >
                   Discord
                 </button>
               </div>

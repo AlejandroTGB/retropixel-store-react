@@ -373,3 +373,48 @@
     gap: 15px;
   }
 }
+
+.modalCargando {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.contenidoCargando {
+  background-color: #1a1d2a;
+  border: 2px solid #3b8cc9;
+  border-radius: 15px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(59, 140, 201, 0.5);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #3a3f5c;
+  border-top: 4px solid #3b8cc9;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contenidoCargando p {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+  font-weight: bold;
+}

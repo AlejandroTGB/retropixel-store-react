@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useProductos } from "../../context/ProductosContext";
 import { useCarrito } from "../../context/CarritoContext";
+import Toast from "../../components/Toast";
 import styles from "./Productos.module.css";
 
 export default function Productos() {
   const { productos, loading, error } = useProductos();
   const { agregarProducto } = useCarrito();
+  const [toastMensaje, setToastMensaje] = useState(null);
 
   const handleAgregarCarrito = (producto) => {
     agregarProducto(producto);
-    alert(`${producto.nombre} agregado al carrito!`);
+    setToastMensaje(`${producto.nombre} agregado al carrito!`);
   };
 
   return (
@@ -49,6 +52,13 @@ export default function Productos() {
           )}
         </div>
       </section>
+      {toastMensaje && (
+        <Toast 
+          mensaje={toastMensaje} 
+          tipo="exito"
+          onClose={() => setToastMensaje(null)}
+        />
+      )}
     </main>
   );
 }

@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Registro.module.css';
 import { authService } from '../../services/authService';
 
 export default function Registro() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -13,6 +14,7 @@ export default function Registro() {
 
   const [registrado, setRegistrado] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [cargandoSocial, setCargandoSocial] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -63,6 +65,26 @@ export default function Registro() {
     setTimeout(() => {
       window.location.href = '/retropixel-store-react/';
     }, 1500);
+  };
+
+  const handleSocialLogin = async (platform) => {
+    setCargandoSocial(platform);
+    
+    try {
+      const nombre = platform.charAt(0).toUpperCase() + platform.slice(1) + ' User';
+      const email = `player_${platform}_${Date.now()}@retropixel.com`;
+      
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      await authService.registro(nombre, email, '123456');
+      localStorage.removeItem('carritoInvitado');
+      
+      setTimeout(() => {
+        window.location.href = '/retropixel-store-react/';
+      }, 1500);
+    } catch (err) {
+      setCargandoSocial(null);
+    }
   };
 
   return (
@@ -198,12 +220,31 @@ export default function Registro() {
                 <span>o regístrate con</span>
               </div>
 
+              {cargandoSocial && (
+                <div className={styles.modalCargando}>
+                  <div className={styles.contenidoCargando}>
+                    <div className={styles.spinner}></div>
+                    <p>Creando cuenta con {cargandoSocial.charAt(0).toUpperCase() + cargandoSocial.slice(1)}...</p>
+                  </div>
+                </div>
+              )}
+
               <div className={styles.socialRegister}>
-                <button type="button" className={`${styles.btnSocial} ${styles.google}`}>
-                  <span>🌐</span> Google
+                <button 
+                  type="button" 
+                  className={`${styles.btnSocial} ${styles.google}`}
+                  onClick={() => handleSocialLogin('google')}
+                  disabled={cargandoSocial}
+                >
+                   Google
                 </button>
-                <button type="button" className={`${styles.btnSocial} ${styles.facebook}`}>
-                  <span>📘</span> Facebook
+                <button 
+                  type="button" 
+                  className={`${styles.btnSocial} ${styles.facebook}`}
+                  onClick={() => handleSocialLogin('facebook')}
+                  disabled={cargandoSocial}
+                >
+                   Facebook
                 </button>
               </div>
 
