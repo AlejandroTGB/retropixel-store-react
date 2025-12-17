@@ -286,7 +286,6 @@ export default function Admin() {
                         >
                           <option value="pendiente">Pendiente</option>
                           <option value="pagado">Pagado</option>
-                          <option value="enviado">Enviado (Digital)</option>
                         </select>
                       </td>
                     </tr>
