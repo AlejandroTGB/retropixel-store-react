@@ -30,7 +30,7 @@
   border: none;
   padding: 12px 25px;
   font-size: 16px;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -73,7 +73,7 @@
   color: #3b8cc9;
   padding: 15px;
   text-align: left;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
   border-bottom: 2px solid #3a3f5c;
 }
 
@@ -118,7 +118,7 @@
   border: none;
   padding: 29px 10px;
   font-size: 12px;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -134,7 +134,7 @@
   border: none;
   padding: 8px 12px;
   font-size: 12px;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
   border-radius: 3px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -246,7 +246,7 @@
   border: none;
   padding: 12px;
   font-size: 16px;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -265,7 +265,7 @@
   border: none;
   padding: 12px;
   font-size: 16px;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -312,5 +312,108 @@
   border-radius: 4px;
   padding: 12px 15px;
   margin-bottom: 15px;
-  font-family: 'PixelGrid', sans-serif;
+  font-family: "PixelGrid", sans-serif;
+}
+
+.mt40 {
+  margin-top: 40px;
+}
+
+.clienteNombre {
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+}
+
+.clienteEmail {
+  font-size: 12px;
+  color: #a0a6c1;
+}
+
+.btnToggle {
+  background: none;
+  border: 1px solid #3a3f5c;
+  border-radius: 4px;
+  color: #3b8cc9;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.btnToggle:hover {
+  background-color: #3a3f5c;
+  color: #fff;
+}
+
+.listaItems {
+  list-style: none;
+  padding: 10px;
+  margin: 10px 0 0 0;
+  font-size: 13px;
+  color: #e1e2eb;
+  background-color: #0f111a;
+  border-radius: 4px;
+  border: 1px solid #3a3f5c;
+}
+
+.listaItems li {
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 4px;
+}
+
+.listaItems li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.totalPedido {
+  color: #3b8cc9;
+  font-weight: bold;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.pagado {
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.enviado {
+  background-color: rgba(59, 140, 201, 0.2);
+  color: #3b8cc9;
+  border: 1px solid #3b8cc9;
+}
+
+.pendiente {
+  background-color: rgba(108, 117, 125, 0.2);
+  color: #a0a6c1;
+  border: 1px solid #6c757d;
+}
+
+.selectEstado {
+  padding: 6px;
+  border-radius: 4px;
+  background-color: #0f111a;
+  color: #fff;
+  border: 1px solid #3a3f5c;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.selectEstado:focus {
+  outline: none;
+  border-color: #3b8cc9;
 }
