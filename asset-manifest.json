@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/retropixel-store-react/static/css/main.9ee35700.css",
-    "main.js": "/retropixel-store-react/static/js/main.21029eab.js",
+    "main.css": "/retropixel-store-react/static/css/main.d04f2252.css",
+    "main.js": "/retropixel-store-react/static/js/main.a7ae742d.js",
     "index.html": "/retropixel-store-react/index.html",
-    "main.9ee35700.css.map": "/retropixel-store-react/static/css/main.9ee35700.css.map",
-    "main.21029eab.js.map": "/retropixel-store-react/static/js/main.21029eab.js.map"
+    "main.d04f2252.css.map": "/retropixel-store-react/static/css/main.d04f2252.css.map",
+    "main.a7ae742d.js.map": "/retropixel-store-react/static/js/main.a7ae742d.js.map"
   },
   "entrypoints": [
-    "static/css/main.9ee35700.css",
-    "static/js/main.21029eab.js"
+    "static/css/main.d04f2252.css",
+    "static/js/main.a7ae742d.js"
   ]
 }
