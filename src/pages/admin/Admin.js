@@ -7,7 +7,6 @@ import Toast from "../../components/Toast";
 export default function Admin() {
   const { productos, agregarProducto, eliminarProducto, actualizarProducto } =
     useProductos();
-
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [productoEditando, setProductoEditando] = useState(null);
   const [formData, setFormData] = useState({
@@ -84,6 +83,7 @@ export default function Admin() {
     }
     try {
       setCargando(true);
+      setMensajeError(null);
       if (productoEditando) {
         await actualizarProducto(productoEditando.id, {
           ...formData,
@@ -106,20 +106,29 @@ export default function Admin() {
       }
       handleCerrarFormulario();
     } catch (error) {
-      setToast({ mensaje: error.message || "Error al guardar", tipo: "error" });
+      setToast({
+        mensaje: error.message || "Error al guardar el producto",
+        tipo: "error",
+      });
     } finally {
       setCargando(false);
     }
   };
 
   const handleEliminar = async (id) => {
-    if (window.confirm("¿Eliminar este producto?")) {
+    if (
+      window.confirm("¿Estás seguro de que quieres eliminar este producto?")
+    ) {
       try {
         setCargando(true);
+        setMensajeError(null);
         await eliminarProducto(id);
-        setToast({ mensaje: "Producto eliminado", tipo: "exito" });
+        setToast({ mensaje: "Producto eliminado exitosamente", tipo: "exito" });
       } catch (error) {
-        setToast({ mensaje: "Error al eliminar", tipo: "error" });
+        setToast({
+          mensaje: error.message || "Error al eliminar el producto",
+          tipo: "error",
+        });
       } finally {
         setCargando(false);
       }
@@ -131,7 +140,7 @@ export default function Admin() {
       <section className={styles.adminSection}>
         <div className={styles.container}>
           <div className={styles.header}>
-            <h2>⚡ Panel de Control</h2>
+            <h2>Panel de Administración</h2>
             <button
               onClick={() => handleAbrirFormulario()}
               className={styles.btnNuevoProducto}
@@ -140,21 +149,21 @@ export default function Admin() {
             </button>
           </div>
 
-          <div
-            className={styles.productosAdmin}
-            style={{ marginBottom: "40px" }}
-          >
-            <h3>📦 Inventario ({productos.length})</h3>
+          <div className={styles.productosAdmin}>
+            <h3>Gestión de Productos</h3>
 
             {productos.length === 0 ? (
-              <p className={styles.sinProductos}>No hay productos.</p>
+              <p className={styles.sinProductos}>
+                No hay productos. ¡Crea uno nuevo!
+              </p>
             ) : (
               <table className={styles.tablaAdmin}>
                 <thead>
                   <tr>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Stock</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -163,7 +172,16 @@ export default function Admin() {
                     <tr key={producto.id}>
                       <td>{producto.nombre}</td>
                       <td>${producto.precio.toLocaleString()}</td>
-                      <td style={{ color: "#28a745" }}>En Stock</td>
+                      <td className={styles.tdDescripcion}>
+                        {producto.descripcion}
+                      </td>
+                      <td>
+                        <img
+                          src={producto.imagen}
+                          alt={producto.nombre}
+                          className={styles.imgPreview}
+                        />
+                      </td>
                       <td className={styles.acciones}>
                         <button
                           onClick={() => handleAbrirFormulario(producto)}
@@ -186,21 +204,20 @@ export default function Admin() {
             )}
           </div>
 
-          <div className={styles.productosAdmin}>
-            <h3>🛒 Últimas Ventas ({pedidos.length})</h3>
+          <div className={`${styles.productosAdmin} ${styles.mt40}`}>
+            <h3>Gestión de Pedidos ({pedidos.length})</h3>
 
             {cargandoPedidos ? (
               <p className={styles.sinProductos}>Cargando pedidos...</p>
             ) : pedidos.length === 0 ? (
-              <p className={styles.sinProductos}>
-                Aún no hay ventas registradas.
-              </p>
+              <p className={styles.sinProductos}>No hay pedidos registrados.</p>
             ) : (
               <table className={styles.tablaAdmin}>
                 <thead>
                   <tr>
                     <th>Fecha</th>
                     <th>Cliente</th>
+                    <th>Productos Comprados</th>
                     <th>Total</th>
                     <th>Estado</th>
                     <th>Acción</th>
@@ -213,48 +230,31 @@ export default function Admin() {
                         {new Date(pedido.fechaCreacion).toLocaleDateString()}
                       </td>
                       <td>
-                        <div style={{ fontSize: "12px", color: "#fff" }}>
+                        <div className={styles.clienteNombre}>
                           {pedido.nombre}
                         </div>
-                        <div style={{ fontSize: "11px" }}>{pedido.email}</div>
+                        <div className={styles.clienteEmail}>
+                          {pedido.email}
+                        </div>
                       </td>
-                      <td style={{ color: "#3b8cc9", fontWeight: "bold" }}>
+                      <td>
+                        <ul className={styles.listaItems}>
+                          {pedido.items &&
+                            pedido.items.map((item, index) => (
+                              <li key={index}>
+                                {item.cantidad}x {item.nombre}
+                              </li>
+                            ))}
+                        </ul>
+                      </td>
+                      <td className={styles.totalPedido}>
                         ${pedido.total?.toLocaleString()}
                       </td>
                       <td>
                         <span
-                          style={{
-                            padding: "4px 8px",
-                            borderRadius: "4px",
-                            fontSize: "12px",
-                            backgroundColor:
-                              pedido.estado === "pagado"
-                                ? "rgba(40, 167, 69, 0.2)"
-                                : pedido.estado === "enviado"
-                                ? "rgba(59, 140, 201, 0.2)"
-                                : pedido.estado === "entregado"
-                                ? "rgba(255, 193, 7, 0.2)"
-                                : "#2a2e3e",
-                            color:
-                              pedido.estado === "pagado"
-                                ? "#28a745"
-                                : pedido.estado === "enviado"
-                                ? "#3b8cc9"
-                                : pedido.estado === "entregado"
-                                ? "#ffc107"
-                                : "#a0a6c1",
-                            border: `1px solid ${
-                              pedido.estado === "pagado"
-                                ? "#28a745"
-                                : pedido.estado === "enviado"
-                                ? "#3b8cc9"
-                                : pedido.estado === "entregado"
-                                ? "#ffc107"
-                                : "#a0a6c1"
-                            }`,
-                          }}
+                          className={`${styles.badge} ${styles[pedido.estado]}`}
                         >
-                          {pedido.estado.toUpperCase()}
+                          {pedido.estado}
                         </span>
                       </td>
                       <td>
@@ -263,14 +263,7 @@ export default function Admin() {
                           onChange={(e) =>
                             handleCambiarEstado(pedido.id, e.target.value)
                           }
-                          style={{
-                            padding: "5px",
-                            borderRadius: "4px",
-                            backgroundColor: "#0f111a",
-                            color: "#fff",
-                            border: "1px solid #3a3f5c",
-                            fontSize: "12px",
-                          }}
+                          className={styles.selectEstado}
                         >
                           <option value="pendiente">Pendiente</option>
                           <option value="pagado">Pagado</option>
@@ -299,60 +292,76 @@ export default function Admin() {
                 ✕
               </button>
             </div>
+
             <form onSubmit={handleSubmit} className={styles.formularioAdmin}>
               {mensajeError && (
                 <div className={styles.errorMessage}>{mensajeError}</div>
               )}
+
               <div className={styles.formGroup}>
-                <label>Nombre</label>
+                <label htmlFor="nombre">Nombre</label>
                 <input
+                  type="text"
+                  id="nombre"
                   name="nombre"
+                  placeholder="Nombre del producto"
                   value={formData.nombre}
                   onChange={handleChange}
                   required
                 />
               </div>
+
               <div className={styles.formGroup}>
-                <label>Precio</label>
+                <label htmlFor="precio">Precio</label>
                 <input
                   type="number"
+                  id="precio"
                   name="precio"
+                  placeholder="Precio en pesos"
                   value={formData.precio}
                   onChange={handleChange}
                   required
                 />
               </div>
+
               <div className={styles.formGroup}>
-                <label>Descripción</label>
+                <label htmlFor="descripcion">Descripción</label>
                 <textarea
+                  id="descripcion"
                   name="descripcion"
+                  placeholder="Descripción del producto"
                   value={formData.descripcion}
                   onChange={handleChange}
-                  rows="3"
+                  rows="4"
                   required
-                />
+                ></textarea>
               </div>
+
               <div className={styles.formGroup}>
-                <label>URL Imagen</label>
+                <label htmlFor="imagen">URL de Imagen</label>
                 <input
+                  type="text"
+                  id="imagen"
                   name="imagen"
+                  placeholder="https://ejemplo.com/imagen.jpg"
                   value={formData.imagen}
                   onChange={handleChange}
-                  placeholder="https://..."
                 />
               </div>
+
               <div className={styles.modalButtons}>
                 <button
                   type="submit"
                   className={styles.btnGuardar}
                   disabled={cargando}
                 >
-                  {cargando ? "..." : "Guardar"}
+                  {cargando ? "Guardando..." : "Guardar Producto"}
                 </button>
                 <button
                   type="button"
                   onClick={handleCerrarFormulario}
                   className={styles.btnCancelar}
+                  disabled={cargando}
                 >
                   Cancelar
                 </button>
