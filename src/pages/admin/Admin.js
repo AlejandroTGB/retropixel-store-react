@@ -1,21 +1,90 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Admin.module.css';
 import { useProductos } from '../../context/ProductosContext';
+import { pedidoService } from '../../services/pedidoService';
+import { usuarioService } from '../../services/usuarioService';
 import Toast from '../../components/Toast';
 
 export default function Admin() {
   const { productos, agregarProducto, eliminarProducto, actualizarProducto } = useProductos();
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [productoEditando, setProductoEditando] = useState(null);
-  const [formData, setFormData] = useState({
-    nombre: '',
-    precio: '',
-    descripcion: '',
-    imagen: ''
-  });
+  const [formData, setFormData] = useState({ nombre: '', precio: '', descripcion: '', imagen: '' });
+
+  const [pedidos, setPedidos] = useState([]);
+  const [cargandoPedidos, setCargandoPedidos] = useState(true);
+  const [pedidoExpandido, setPedidoExpandido] = useState(null);
+
+  const [usuarios, setUsuarios] = useState([]);
+  const [cargandoUsuarios, setCargandoUsuarios] = useState(true);
+
   const [cargando, setCargando] = useState(false);
   const [mensajeError, setMensajeError] = useState(null);
   const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    cargarPedidos();
+    cargarUsuarios();
+  }, []);
+
+  const cargarPedidos = async () => {
+    try {
+      const data = await pedidoService.obtenerTodos();
+      const ordenados = data.sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
+      setPedidos(ordenados);
+    } catch (error) {
+      console.error("Error pedidos:", error);
+    } finally {
+      setCargandoPedidos(false);
+    }
+  };
+
+  const cargarUsuarios = async () => {
+    try {
+      const data = await usuarioService.obtenerTodos();
+      setUsuarios(data);
+    } catch (error) {
+      console.error("Error usuarios:", error);
+    } finally {
+      setCargandoUsuarios(false);
+    }
+  };
+
+  const handleCambiarRol = async (id, nuevoRol) => {
+    try {
+      await usuarioService.cambiarRol(id, nuevoRol);
+      setToast({ mensaje: 'Rol de usuario actualizado', tipo: 'exito' });
+      cargarUsuarios();
+    } catch (error) {
+      setToast({ mensaje: 'Error al cambiar rol', tipo: 'error' });
+    }
+  };
+
+  const handleEliminarUsuario = async (id) => {
+    if (window.confirm('¿Eliminar este usuario permanentemente?')) {
+      try {
+        await usuarioService.eliminarUsuario(id);
+        setToast({ mensaje: 'Usuario eliminado', tipo: 'exito' });
+        cargarUsuarios();
+      } catch (error) {
+        setToast({ mensaje: 'Error al eliminar usuario', tipo: 'error' });
+      }
+    }
+  };
+
+  const handleCambiarEstado = async (id, nuevoEstado) => {
+    try {
+      await pedidoService.actualizarEstado(id, nuevoEstado);
+      setToast({ mensaje: 'Estado actualizado', tipo: 'exito' });
+      cargarPedidos();
+    } catch (error) {
+      setToast({ mensaje: 'Error al actualizar estado', tipo: 'error' });
+    }
+  };
+
+  const toggleDetalles = (id) => {
+    setPedidoExpandido(pedidoExpandido === id ? null : id);
+  };
 
   const handleAbrirFormulario = (producto = null) => {
     if (producto) {
@@ -42,23 +111,16 @@ export default function Admin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!formData.nombre || !formData.precio || !formData.descripcion) {
       setMensajeError('Por favor completa todos los campos');
       return;
     }
-
     try {
       setCargando(true);
       setMensajeError(null);
-
       if (productoEditando) {
-        await actualizarProducto(productoEditando.id, {
-          ...formData,
-          precio: parseInt(formData.precio),
-          id: productoEditando.id
-        });
-        setToast({ mensaje: 'Producto actualizado exitosamente', tipo: 'exito' });
+        await actualizarProducto(productoEditando.id, { ...formData, precio: parseInt(formData.precio), id: productoEditando.id });
+        setToast({ mensaje: 'Producto actualizado', tipo: 'exito' });
       } else {
         const nuevoProducto = {
           nombre: formData.nombre,
@@ -67,28 +129,25 @@ export default function Admin() {
           imagen: formData.imagen || 'https://via.placeholder.com/200'
         };
         await agregarProducto(nuevoProducto);
-        setToast({ mensaje: 'Producto creado exitosamente', tipo: 'exito' });
+        setToast({ mensaje: 'Producto creado', tipo: 'exito' });
       }
-
       handleCerrarFormulario();
     } catch (error) {
-      setToast({ mensaje: error.message || 'Error al guardar el producto', tipo: 'error' });
-      console.error('Error:', error);
+      setToast({ mensaje: error.message || 'Error al guardar', tipo: 'error' });
     } finally {
       setCargando(false);
     }
   };
 
-  const handleEliminar = async (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+  const handleEliminarProducto = async (id) => {
+    if (window.confirm('¿Eliminar producto?')) {
       try {
         setCargando(true);
         setMensajeError(null);
         await eliminarProducto(id);
-        setToast({ mensaje: 'Producto eliminado exitosamente', tipo: 'exito' });
+        setToast({ mensaje: 'Producto eliminado', tipo: 'exito' });
       } catch (error) {
-        setToast({ mensaje: error.message || 'Error al eliminar el producto', tipo: 'error' });
-        console.error('Error:', error);
+        setToast({ mensaje: error.message, tipo: 'error' });
       } finally {
         setCargando(false);
       }
@@ -100,7 +159,7 @@ export default function Admin() {
       <section className={styles.adminSection}>
         <div className={styles.container}>
           <div className={styles.header}>
-            <h2> Panel de Administración</h2>
+            <h2>Panel de Administración</h2>
             <button onClick={() => handleAbrirFormulario()} className={styles.btnNuevoProducto}>
               + Nuevo Producto
             </button>
@@ -108,9 +167,8 @@ export default function Admin() {
 
           <div className={styles.productosAdmin}>
             <h3>Gestión de Productos</h3>
-            
             {productos.length === 0 ? (
-              <p className={styles.sinProductos}>No hay productos. ¡Crea uno nuevo!</p>
+              <p className={styles.sinProductos}>No hay productos.</p>
             ) : (
               <table className={styles.tablaAdmin}>
                 <thead>
@@ -128,22 +186,112 @@ export default function Admin() {
                       <td>{producto.nombre}</td>
                       <td>${producto.precio.toLocaleString()}</td>
                       <td className={styles.tdDescripcion}>{producto.descripcion}</td>
+                      <td><img src={producto.imagen} alt={producto.nombre} className={styles.imgPreview} /></td>
+                      <td className={styles.acciones}>
+                        <button onClick={() => handleAbrirFormulario(producto)} className={styles.btnEditar}>Editar</button>
+                        <button onClick={() => handleEliminarProducto(producto.id)} className={styles.btnEliminarAdmin} disabled={cargando}>Eliminar</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          <div className={`${styles.productosAdmin} ${styles.mt40}`}>
+            <h3>Gestión de Pedidos ({pedidos.length})</h3>
+            {cargandoPedidos ? <p className={styles.sinProductos}>Cargando...</p> : 
+             pedidos.length === 0 ? <p className={styles.sinProductos}>Sin pedidos.</p> : (
+              <table className={styles.tablaAdmin}>
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Detalle</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pedidos.map(pedido => (
+                    <tr key={pedido.id}>
+                      <td>{new Date(pedido.fechaCreacion).toLocaleDateString()}</td>
                       <td>
-                        <img src={producto.imagen} alt={producto.nombre} className={styles.imgPreview} />
+                        <div className={styles.clienteNombre}>{pedido.nombre}</div>
+                        <div className={styles.clienteEmail}>{pedido.email}</div>
+                      </td>
+                      <td>
+                        <button className={styles.btnToggle} onClick={() => toggleDetalles(pedido.id)}>
+                          {pedidoExpandido === pedido.id ? 'Ocultar' : 'Ver'} {pedido.items?.length || 0} ítems {pedidoExpandido === pedido.id ? '▴' : '▾'}
+                        </button>
+                        {pedidoExpandido === pedido.id && (
+                          <ul className={styles.listaItems}>
+                            {pedido.items && pedido.items.map((item, index) => (
+                              <li key={index}>{item.cantidad}x {item.nombre}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </td>
+                      <td className={styles.totalPedido}>${pedido.total?.toLocaleString()}</td>
+                      <td>
+                        <span className={`${styles.badge} ${styles[pedido.estado]}`}>{pedido.estado}</span>
+                      </td>
+                      <td>
+                        <select 
+                          value={pedido.estado} 
+                          onChange={(e) => handleCambiarEstado(pedido.id, e.target.value)} 
+                          className={styles.selectEstado}
+                        >
+                          <option value="pendiente">Pendiente</option>
+                          <option value="pagado">Pagado</option>
+                          <option value="enviado">Enviado</option>
+                        </select>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          <div className={`${styles.productosAdmin} ${styles.mt40}`}>
+            <h3>Gestión de Usuarios ({usuarios.length})</h3>
+            {cargandoUsuarios ? <p className={styles.sinProductos}>Cargando...</p> : 
+             usuarios.length === 0 ? <p className={styles.sinProductos}>Sin usuarios.</p> : (
+              <table className={styles.tablaAdmin}>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol Actual</th>
+                    <th>Cambiar Rol</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usuarios.map(usuario => (
+                    <tr key={usuario.id}>
+                      <td className={styles.clienteNombre}>{usuario.nombre}</td>
+                      <td className={styles.clienteEmail}>{usuario.email}</td>
+                      <td>
+                        <span className={`${styles.badge} ${usuario.rol === 'admin' ? styles.rolAdmin : styles.rolUsuario}`}>
+                          {usuario.rol.toUpperCase()}
+                        </span>
+                      </td>
+                      <td>
+                        <select 
+                          value={usuario.rol} 
+                          onChange={(e) => handleCambiarRol(usuario.id, e.target.value)} 
+                          className={styles.selectEstado}
+                        >
+                          <option value="usuario">Usuario</option>
+                          <option value="admin">Admin</option>
+                        </select>
                       </td>
                       <td className={styles.acciones}>
-                        <button
-                          onClick={() => handleAbrirFormulario(producto)}
-                          className={styles.btnEditar}
-                        >
-                           Editar
-                        </button>
-                        <button
-                          onClick={() => handleEliminar(producto.id)}
-                          className={styles.btnEliminarAdmin}
-                          disabled={cargando}
-                        >
-                           Eliminar
+                        <button onClick={() => handleEliminarUsuario(usuario.id)} className={styles.btnEliminarAdmin}>
+                          Eliminar
                         </button>
                       </td>
                     </tr>
@@ -152,6 +300,7 @@ export default function Admin() {
               </table>
             )}
           </div>
+
         </div>
       </section>
 
@@ -159,96 +308,36 @@ export default function Admin() {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.modalHeader}>
-              <h3>{productoEditando ? 'Editar Producto' : 'Nuevo Producto'}</h3>
+              <h3>{productoEditando ? 'Editar' : 'Nuevo'} Producto</h3>
               <button onClick={handleCerrarFormulario} className={styles.btnCerrar}>✕</button>
             </div>
-
             <form onSubmit={handleSubmit} className={styles.formularioAdmin}>
-              {mensajeError && (
-                <div className={styles.errorMessage}>
-                  {mensajeError}
-                </div>
-              )}
-
+              {mensajeError && <div className={styles.errorMessage}>{mensajeError}</div>}
               <div className={styles.formGroup}>
-                <label htmlFor="nombre">Nombre</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  placeholder="Nombre del producto"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                />
+                <label>Nombre</label>
+                <input name="nombre" value={formData.nombre} onChange={handleChange} required />
               </div>
-
               <div className={styles.formGroup}>
-                <label htmlFor="precio">Precio</label>
-                <input
-                  type="number"
-                  id="precio"
-                  name="precio"
-                  placeholder="Precio en pesos"
-                  value={formData.precio}
-                  onChange={handleChange}
-                  required
-                />
+                <label>Precio</label>
+                <input type="number" name="precio" value={formData.precio} onChange={handleChange} required />
               </div>
-
               <div className={styles.formGroup}>
-                <label htmlFor="descripcion">Descripción</label>
-                <textarea
-                  id="descripcion"
-                  name="descripcion"
-                  placeholder="Descripción del producto"
-                  value={formData.descripcion}
-                  onChange={handleChange}
-                  rows="4"
-                  required
-                ></textarea>
+                <label>Descripción</label>
+                <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} rows="3" required />
               </div>
-
               <div className={styles.formGroup}>
-                <label htmlFor="imagen">URL de Imagen</label>
-                <input
-                  type="text"
-                  id="imagen"
-                  name="imagen"
-                  placeholder="https://ejemplo.com/imagen.jpg"
-                  value={formData.imagen}
-                  onChange={handleChange}
-                />
+                <label>URL Imagen</label>
+                <input name="imagen" value={formData.imagen} onChange={handleChange} placeholder="https://..." />
               </div>
-
               <div className={styles.modalButtons}>
-                <button 
-                  type="submit" 
-                  className={styles.btnGuardar}
-                  disabled={cargando}
-                >
-                  {cargando ? 'Guardando...' : 'Guardar Producto'}
-                </button>
-                <button 
-                  type="button" 
-                  onClick={handleCerrarFormulario} 
-                  className={styles.btnCancelar}
-                  disabled={cargando}
-                >
-                  Cancelar
-                </button>
+                <button type="submit" className={styles.btnGuardar} disabled={cargando}>Guardar</button>
+                <button type="button" onClick={handleCerrarFormulario} className={styles.btnCancelar}>Cancelar</button>
               </div>
             </form>
           </div>
         </div>
       )}
-      {toast && (
-        <Toast 
-          mensaje={toast.mensaje} 
-          tipo={toast.tipo}
-          onClose={() => setToast(null)}
-        />
-      )}
+      {toast && <Toast mensaje={toast.mensaje} tipo={toast.tipo} onClose={() => setToast(null)} />}
     </main>
   );
 }
