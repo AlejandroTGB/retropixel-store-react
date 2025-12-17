@@ -18,7 +18,7 @@ export default function Admin() {
 
   const [pedidos, setPedidos] = useState([]);
   const [cargandoPedidos, setCargandoPedidos] = useState(true);
-
+  const [pedidoExpandido, setPedidoExpandido] = useState(null);
   const [cargando, setCargando] = useState(false);
   const [mensajeError, setMensajeError] = useState(null);
   const [toast, setToast] = useState(null);
@@ -49,6 +49,14 @@ export default function Admin() {
       cargarPedidos();
     } catch (error) {
       setToast({ mensaje: "Error al actualizar estado", tipo: "error" });
+    }
+  };
+
+  const toggleDetalles = (id) => {
+    if (pedidoExpandido === id) {
+      setPedidoExpandido(null);
+    } else {
+      setPedidoExpandido(id);
     }
   };
 
@@ -151,7 +159,6 @@ export default function Admin() {
 
           <div className={styles.productosAdmin}>
             <h3>Gestión de Productos</h3>
-
             {productos.length === 0 ? (
               <p className={styles.sinProductos}>
                 No hay productos. ¡Crea uno nuevo!
@@ -238,14 +245,26 @@ export default function Admin() {
                         </div>
                       </td>
                       <td>
-                        <ul className={styles.listaItems}>
-                          {pedido.items &&
-                            pedido.items.map((item, index) => (
-                              <li key={index}>
-                                {item.cantidad}x {item.nombre}
-                              </li>
-                            ))}
-                        </ul>
+                        <button
+                          className={styles.btnToggle}
+                          onClick={() => toggleDetalles(pedido.id)}
+                        >
+                          {pedidoExpandido === pedido.id ? "Ocultar" : "Ver"}{" "}
+                          {pedido.items?.length || 0} ítems{" "}
+                          {pedidoExpandido === pedido.id ? "▴" : "▾"}
+                        </button>
+
+                        {pedidoExpandido === pedido.id && (
+                          <ul className={styles.listaItems}>
+                            {pedido.items &&
+                              pedido.items.map((item, index) => (
+                                <li key={index}>
+                                  {item.cantidad}x {item.nombre} - $
+                                  {item.precio.toLocaleString()}
+                                </li>
+                              ))}
+                          </ul>
+                        )}
                       </td>
                       <td className={styles.totalPedido}>
                         ${pedido.total?.toLocaleString()}
@@ -267,8 +286,7 @@ export default function Admin() {
                         >
                           <option value="pendiente">Pendiente</option>
                           <option value="pagado">Pagado</option>
-                          <option value="enviado">Enviado</option>
-                          <option value="entregado">Entregado</option>
+                          <option value="enviado">Enviado (Digital)</option>
                         </select>
                       </td>
                     </tr>
@@ -292,76 +310,60 @@ export default function Admin() {
                 ✕
               </button>
             </div>
-
             <form onSubmit={handleSubmit} className={styles.formularioAdmin}>
               {mensajeError && (
                 <div className={styles.errorMessage}>{mensajeError}</div>
               )}
-
               <div className={styles.formGroup}>
-                <label htmlFor="nombre">Nombre</label>
+                <label>Nombre</label>
                 <input
-                  type="text"
-                  id="nombre"
                   name="nombre"
-                  placeholder="Nombre del producto"
                   value={formData.nombre}
                   onChange={handleChange}
                   required
                 />
               </div>
-
               <div className={styles.formGroup}>
-                <label htmlFor="precio">Precio</label>
+                <label>Precio</label>
                 <input
                   type="number"
-                  id="precio"
                   name="precio"
-                  placeholder="Precio en pesos"
                   value={formData.precio}
                   onChange={handleChange}
                   required
                 />
               </div>
-
               <div className={styles.formGroup}>
-                <label htmlFor="descripcion">Descripción</label>
+                <label>Descripción</label>
                 <textarea
-                  id="descripcion"
                   name="descripcion"
-                  placeholder="Descripción del producto"
                   value={formData.descripcion}
                   onChange={handleChange}
-                  rows="4"
+                  rows="3"
                   required
-                ></textarea>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="imagen">URL de Imagen</label>
-                <input
-                  type="text"
-                  id="imagen"
-                  name="imagen"
-                  placeholder="https://ejemplo.com/imagen.jpg"
-                  value={formData.imagen}
-                  onChange={handleChange}
                 />
               </div>
-
+              <div className={styles.formGroup}>
+                <label>URL Imagen</label>
+                <input
+                  name="imagen"
+                  value={formData.imagen}
+                  onChange={handleChange}
+                  placeholder="https://..."
+                />
+              </div>
               <div className={styles.modalButtons}>
                 <button
                   type="submit"
                   className={styles.btnGuardar}
                   disabled={cargando}
                 >
-                  {cargando ? "Guardando..." : "Guardar Producto"}
+                  {cargando ? "Guardando..." : "Guardar"}
                 </button>
                 <button
                   type="button"
                   onClick={handleCerrarFormulario}
                   className={styles.btnCancelar}
-                  disabled={cargando}
                 >
                   Cancelar
                 </button>
